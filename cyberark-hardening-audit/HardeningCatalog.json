@@ -6,426 +6,2546 @@
     "confidence: Documented = the doc states the setting and value. StepDocumented-MechanismInferred = the doc states the step, but the registry key, service name or probe used to verify it comes from Windows knowledge, not the doc. VersionDependent = the docs differ between versions."
   ],
   "sources": {
-    "SH_PSM_APPLY":   { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/security/psm-hardening-configuration.htm", "title": "Apply PSM hardening (standalone and domain)" },
-    "SH_PSM_REQ":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/install_psm_harden.htm", "title": "Understand PSM hardening requirements" },
-    "SH_PSM_STAGE":   { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/psm_hardening_stage.htm", "title": "PSM Hardening (stage)" },
-    "SH_PSM_APPLOCK": { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/configure_applocker.htm", "title": "Configure AppLocker" },
-    "SH_PSM_GPO":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pasref/psm-in-domain-gpo.htm", "title": "Configure AppLocker for PSM (in-domain GPO)" },
-    "SH_PSM_UPG":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/following-upgrade-of-psm.htm", "title": "Post PSM upgrade" },
-    "SH_PSM_LEGACY":  { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted-legacy/latest/en/content/security/psm-hardening-configuration.htm", "title": "Hardening Guidelines for PSM Servers (legacy)" },
-    "SH_PSM_TASKS_LEGACY": { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted-legacy/latest/en/content/pas%20inst/install_psm_harden.htm", "title": "PSM Hardening Tasks (legacy)" },
-    "SH_PSM_126":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/PAS/12.6/en/Content/Security/PSM-hardening-configuration.htm", "title": "Hardening Guidelines for PSM Servers (v12.6)" },
-    "SH_CPM_TASKS":   { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-task-descriptions.htm", "title": "CPM hardening task descriptions (latest)" },
-    "SH_CPM_TASKS13": { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/13.0/en/content/pas%20inst/cpm-hardening-task-descriptions.htm", "title": "CPM hardening task descriptions (v13.0)" },
-    "SH_CPM_RUN":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-runscript.htm", "title": "Harden the CPM server" },
-    "SH_CPM_UPG":     { "platform": "SelfHosted", "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-upgrade-runscript.htm", "title": "Harden the CPM server after upgrade" },
-    "PCS_PSM":        { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/security/psm-hardening-configuration.htm", "title": "PSM hardening description (Standard)" },
-    "PCS_CPM":        { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/pas%20inst/cpm-hardening-task-descriptions.htm", "title": "CPM hardening description (Standard)" },
-    "PCS_OVERVIEW":   { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-hardening-overview.htm", "title": "Connector hardening (Standard)" },
-    "PCS_GPO":        { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-gpo-parameters.htm", "title": "Connector GPO parameters (Standard)" },
-    "PCS_INSTALL":    { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-connectorinstall-pc.htm", "title": "Install the Connector using the Privilege Cloud Installer (Standard)" },
-    "PCS_UPG":        { "platform": "PrivilegeCloudStandard", "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-upgrade-connector-12.7-later-cm.htm", "title": "Upgrade the Connector using Connector Management (Standard)" },
-    "ISPSS_PSM":      { "platform": "PrivilegeCloudISPSS", "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/security/psm-hardening-configuration.htm", "title": "PSM hardening description (ISPSS)" },
-    "ISPSS_CPM":      { "platform": "PrivilegeCloudISPSS", "url": "https://docs.cyberark.com/ispss-deployment/latest/en/Content/PAS%20INST/CPM-hardening-task-descriptions.htm", "title": "CPM hardening description (ISPSS)" },
-    "ISPSS_OVERVIEW": { "platform": "PrivilegeCloudISPSS", "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/privilege%20cloud/privcloud-hardening-overview.htm", "title": "Connector hardening (ISPSS)" },
-    "ISPSS_UPG":      { "platform": "PrivilegeCloudISPSS", "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/privilege%20cloud/privcloud-upgrade-connector-12.7-later-cm.htm", "title": "Upgrade the Connector using Connector Management (ISPSS)" }
+    "SH_PSM_APPLY": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/security/psm-hardening-configuration.htm",
+      "title": "Apply PSM hardening (standalone and domain)"
+    },
+    "SH_PSM_REQ": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/install_psm_harden.htm",
+      "title": "Understand PSM hardening requirements"
+    },
+    "SH_PSM_STAGE": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/psm_hardening_stage.htm",
+      "title": "PSM Hardening (stage)"
+    },
+    "SH_PSM_APPLOCK": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/configure_applocker.htm",
+      "title": "Configure AppLocker"
+    },
+    "SH_PSM_GPO": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pasref/psm-in-domain-gpo.htm",
+      "title": "Configure AppLocker for PSM (in-domain GPO)"
+    },
+    "SH_PSM_UPG": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/following-upgrade-of-psm.htm",
+      "title": "Post PSM upgrade"
+    },
+    "SH_PSM_LEGACY": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted-legacy/latest/en/content/security/psm-hardening-configuration.htm",
+      "title": "Hardening Guidelines for PSM Servers (legacy)"
+    },
+    "SH_PSM_TASKS_LEGACY": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted-legacy/latest/en/content/pas%20inst/install_psm_harden.htm",
+      "title": "PSM Hardening Tasks (legacy)"
+    },
+    "SH_PSM_126": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/PAS/12.6/en/Content/Security/PSM-hardening-configuration.htm",
+      "title": "Hardening Guidelines for PSM Servers (v12.6)"
+    },
+    "SH_CPM_TASKS": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-task-descriptions.htm",
+      "title": "CPM hardening task descriptions (latest)"
+    },
+    "SH_CPM_TASKS13": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/13.0/en/content/pas%20inst/cpm-hardening-task-descriptions.htm",
+      "title": "CPM hardening task descriptions (v13.0)"
+    },
+    "SH_CPM_RUN": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-runscript.htm",
+      "title": "Harden the CPM server"
+    },
+    "SH_CPM_UPG": {
+      "platform": "SelfHosted",
+      "url": "https://docs.cyberark.com/pam-self-hosted/latest/en/content/pas%20inst/cpm-hardening-upgrade-runscript.htm",
+      "title": "Harden the CPM server after upgrade"
+    },
+    "PCS_PSM": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/security/psm-hardening-configuration.htm",
+      "title": "PSM hardening description (Standard)"
+    },
+    "PCS_CPM": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/pas%20inst/cpm-hardening-task-descriptions.htm",
+      "title": "CPM hardening description (Standard)"
+    },
+    "PCS_OVERVIEW": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-hardening-overview.htm",
+      "title": "Connector hardening (Standard)"
+    },
+    "PCS_GPO": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-gpo-parameters.htm",
+      "title": "Connector GPO parameters (Standard)"
+    },
+    "PCS_INSTALL": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-connectorinstall-pc.htm",
+      "title": "Install the Connector using the Privilege Cloud Installer (Standard)"
+    },
+    "PCS_UPG": {
+      "platform": "PrivilegeCloudStandard",
+      "url": "https://docs.cyberark.com/privilege-cloud-standard/latest/en/content/privilege%20cloud/privcloud-upgrade-connector-12.7-later-cm.htm",
+      "title": "Upgrade the Connector using Connector Management (Standard)"
+    },
+    "ISPSS_PSM": {
+      "platform": "PrivilegeCloudISPSS",
+      "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/security/psm-hardening-configuration.htm",
+      "title": "PSM hardening description (ISPSS)"
+    },
+    "ISPSS_CPM": {
+      "platform": "PrivilegeCloudISPSS",
+      "url": "https://docs.cyberark.com/ispss-deployment/latest/en/Content/PAS%20INST/CPM-hardening-task-descriptions.htm",
+      "title": "CPM hardening description (ISPSS)"
+    },
+    "ISPSS_OVERVIEW": {
+      "platform": "PrivilegeCloudISPSS",
+      "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/privilege%20cloud/privcloud-hardening-overview.htm",
+      "title": "Connector hardening (ISPSS)"
+    },
+    "ISPSS_UPG": {
+      "platform": "PrivilegeCloudISPSS",
+      "url": "https://docs.cyberark.com/ispss-deployment/latest/en/content/privilege%20cloud/privcloud-upgrade-connector-12.7-later-cm.htm",
+      "title": "Upgrade the Connector using Connector Management (ISPSS)"
+    },
+    "MS_ENTRA_VM": {
+      "platform": "Microsoft",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/devices/howto-vm-sign-in-azure-ad-windows",
+      "title": "Sign in to Windows VM in Azure using Microsoft Entra ID (Microsoft Learn)"
+    },
+    "MS_AVD_HOSTS": {
+      "platform": "Microsoft",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-desktop/add-session-hosts-host-pool",
+      "title": "Add session hosts to a host pool (Microsoft Learn)"
+    }
   },
   "checks": [
     {
-      "id": "PSM-01", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "PSMHardening.ps1 has run and its log has no errors",
-      "probe": { "type": "HardeningLog", "component": "PSM", "folder": "Hardening", "patterns": ["*.log"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [
-        { "src": "SH_PSM_TASKS_LEGACY", "find": "check the log for errors" },
-        { "src": "PCS_PSM", "find": "Hardening" },
-        { "src": "ISPSS_PSM", "find": "Hardening" }
+      "id": "PSM-01",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
       ],
-      "remediation": "Run <PSM>\\Hardening\\PSMHardening.ps1 as Administrator (execution policy RemoteSigned, read-only flag removed). Then review the log."
-    },
-    {
-      "id": "PSM-02", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Hardening re-applied after the last PSM upgrade",
-      "probe": { "type": "ReappliedAfterUpgrade", "component": "PSM", "folder": "Hardening", "patterns": ["*.log"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "PSMHardening.ps1 has run and its log has no errors",
+      "probe": {
+        "type": "HardeningLog",
+        "component": "PSM",
+        "folder": "Hardening",
+        "patterns": [
+          "*.log"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "SH_PSM_REQ", "find": "reapply after upgrades" },
-        { "src": "SH_PSM_UPG", "find": "don't use the backed-up" }
+        {
+          "src": "SH_PSM_TASKS_LEGACY",
+          "find": "check the log for errors"
+        },
+        {
+          "src": "PCS_PSM",
+          "find": "Hardening"
+        },
+        {
+          "src": "ISPSS_PSM",
+          "find": "Hardening"
+        }
       ],
-      "remediation": "After an upgrade, re-run the NEW PSMHardening.ps1 and PSMConfigureAppLocker.ps1. Do not use the backed-up copies."
+      "remediation": "Run <PSM>\\Hardening\\PSMHardening.ps1 as Administrator (execution policy RemoteSigned, read-only flag removed). Then review the log.",
+      "checklist": [
+        {
+          "tool": "Files & Logs",
+          "location": "<PSM install>\\Hardening\\*.log",
+          "item": "Newest hardening log",
+          "expected": "Exists; no lines with Error / Failed / Exception",
+          "verify": "Get-ChildItem '<PSM>\\Hardening\\*.log' | Sort LastWriteTime | Select -Last 1 | Select-String 'error|failed|exception'",
+          "basis": "Doc",
+          "note": "The log file name and location are inferred; the doc says only 'check the log for errors'."
+        }
+      ]
     },
     {
-      "id": "PSM-03", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "RDP-Tcp MinEncryptionLevel = 3 (High)",
-      "probe": { "type": "Registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp", "name": "MinEncryptionLevel", "operator": "eq", "expected": 3 },
-      "confidence": "Documented", "failStatus": "NOT DONE",
+      "id": "PSM-02",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Hardening re-applied after the last PSM upgrade",
+      "probe": {
+        "type": "ReappliedAfterUpgrade",
+        "component": "PSM",
+        "folder": "Hardening",
+        "patterns": [
+          "*.log"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
       "refs": [
-        { "src": "PCS_PSM", "find": "MinEncryptionLevel" },
-        { "src": "ISPSS_PSM", "find": "Sets the MinEncryptionLevel to \"3\" (High)" }
+        {
+          "src": "SH_PSM_REQ",
+          "find": "reapply after upgrades"
+        },
+        {
+          "src": "SH_PSM_UPG",
+          "find": "don't use the backed-up"
+        }
       ],
-      "remediation": "Re-run PSMHardening.ps1, or set MinEncryptionLevel=3 on the RDP-Tcp listener."
+      "remediation": "After an upgrade, re-run the NEW PSMHardening.ps1 and PSMConfigureAppLocker.ps1. Do not use the backed-up copies.",
+      "checklist": [
+        {
+          "tool": "Files & Logs",
+          "location": "<PSM install>\\Hardening\\*.log vs <PSM install>\\*.exe",
+          "item": "Log timestamp vs binary timestamp",
+          "expected": "Newest hardening log is newer than newest PSM binary (hardening re-run after upgrade)",
+          "verify": "(Get-ChildItem '<PSM>\\Hardening\\*.log' | Sort LastWriteTime)[-1].LastWriteTime ; (Get-ChildItem '<PSM>\\*.exe' | Sort LastWriteTime)[-1].LastWriteTime",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "PSM-04", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "RDP-Tcp SecurityLayer changed by hardening (review the value)",
-      "probe": { "type": "Registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp", "name": "SecurityLayer", "operator": "evidence" },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_PSM", "find": "SecurityLayer" } ],
-      "remediation": "The docs say the script changes SecurityLayer but the excerpt did not give the target value. Compare against the PSM hardening page for your version."
-    },
-    {
-      "id": "PSM-05", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "SMB1 server disabled",
-      "probe": { "type": "Smb1Server" },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
+      "id": "PSM-03",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "RDP-Tcp MinEncryptionLevel = 3 (High)",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+        "name": "MinEncryptionLevel",
+        "operator": "eq",
+        "expected": 3
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "PCS_PSM", "find": "Disables the SMB1 Server" },
-        { "src": "ISPSS_PSM", "find": "Disables the SMB1 Server" }
+        {
+          "src": "PCS_PSM",
+          "find": "MinEncryptionLevel"
+        },
+        {
+          "src": "ISPSS_PSM",
+          "find": "Sets the MinEncryptionLevel to \"3\" (High)"
+        }
       ],
-      "remediation": "Set-SmbServerConfiguration -EnableSMB1Protocol $false, or re-run hardening."
+      "remediation": "Re-run PSMHardening.ps1, or set MinEncryptionLevel=3 on the RDP-Tcp listener.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+          "item": "MinEncryptionLevel",
+          "type": "REG_DWORD",
+          "expected": "3 (High)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp' -Name 'MinEncryptionLevel'",
+          "basis": "Doc",
+          "note": "Value from the CyberArk doc; key location is standard Windows."
+        }
+      ]
     },
     {
-      "id": "PSM-06", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "SMB1 client disabled (mrxsmb10 disabled, removed from LanmanWorkstation dependencies)",
-      "probe": { "type": "RegistrySet", "items": [
-        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mrxsmb10", "name": "Start", "operator": "eq", "expected": 4, "missingIs": "pass" },
-        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation", "name": "DependOnService", "operator": "notcontains", "expected": "MRxSmb10", "missingIs": "pass" }
-      ] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "PCS_PSM", "find": "setting mrxsmb10 to disabled" } ],
-      "remediation": "Re-run hardening, or disable mrxsmb10 (Start=4) and remove MRxSmb10 from LanmanWorkstation DependOnService."
-    },
-    {
-      "id": "PSM-07", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "TLS hardening", "title": "SSL 2.0/3.0 and TLS 1.0/1.1 disabled (Enabled=0, DisabledByDefault=1)",
-      "probe": { "type": "SchannelLegacyDisabled", "protocols": ["SSL 2.0", "SSL 3.0", "TLS 1.0", "TLS 1.1"], "roles": ["Server", "Client"] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
+      "id": "PSM-04",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "RDP-Tcp SecurityLayer changed by hardening (review the value)",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+        "name": "SecurityLayer",
+        "operator": "evidence"
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
       "refs": [
-        { "src": "ISPSS_PSM", "find": "Disables SSL/TLS versions earlier than TLS 1.2" },
-        { "src": "PCS_PSM", "find": "earlier than TLS 1.2" }
+        {
+          "src": "PCS_PSM",
+          "find": "SecurityLayer"
+        }
       ],
-      "remediation": "Run the TLS hardening step. If an older connector needs TLS 1.0/1.1, the docs require a manual registry change afterwards. Document that exception."
+      "remediation": "The docs say the script changes SecurityLayer but the excerpt did not give the target value. Compare against the PSM hardening page for your version.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+          "item": "SecurityLayer",
+          "type": "REG_DWORD",
+          "expected": "Value set by PSMHardening.ps1. Windows meaning: 0 = RDP, 1 = Negotiate, 2 = SSL/TLS. Target value not confirmed from the doc.",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp' -Name 'SecurityLayer'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Security",
+          "item": "Require use of specific security layer for remote (RDP) connections",
+          "expected": "Match your approved value",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Windows",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\SecurityLayer"
+        }
+      ]
     },
     {
-      "id": "PSM-08", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Remote Desktop Users group cleared (optional: ClearRemoteDesktopUsers, default No)",
-      "probe": { "type": "LocalGroupEmpty", "group": "Remote Desktop Users" },
-      "optional": true, "configKey": "ClearRemoteDesktopUsers",
-      "confidence": "Documented", "failStatus": "NOT DONE",
+      "id": "PSM-05",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "SMB1 server disabled",
+      "probe": {
+        "type": "Smb1Server"
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "ISPSS_PSM", "find": "ClearRemoteDesktopUsers (Default: No)" },
-        { "src": "PCS_PSM", "find": "ClearRemoteDesktopUsers" },
-        { "src": "SH_PSM_126", "find": "If you use ActiveX it is recommended to leave the ClearRemoteDesktopUsers parameter set to \"No\"" }
+        {
+          "src": "PCS_PSM",
+          "find": "Disables the SMB1 Server"
+        },
+        {
+          "src": "ISPSS_PSM",
+          "find": "Disables the SMB1 Server"
+        }
       ],
-      "remediation": "The group should contain only non-admin maintenance users. Review the members listed in the evidence."
+      "remediation": "Set-SmbServerConfiguration -EnableSMB1Protocol $false, or re-run hardening.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "item": "SMB1",
+          "type": "REG_DWORD",
+          "expected": "0 (or value absent when the SMB1 feature is removed)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters' -Name 'SMB1'",
+          "basis": "Windows"
+        },
+        {
+          "tool": "PowerShell",
+          "location": "Get-SmbServerConfiguration",
+          "item": "EnableSMB1Protocol",
+          "expected": "False",
+          "verify": "(Get-SmbServerConfiguration).EnableSMB1Protocol",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > MS Security Guide",
+          "item": "Configure SMB v1 server",
+          "expected": "Disabled",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Windows",
+          "note": "Requires the Microsoft Security Baseline SecGuide.admx."
+        }
+      ]
     },
     {
-      "id": "PSM-09", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "AppLocker", "title": "AppLocker enforced (AppIDSvc running and effective EXE rules enforced)",
-      "probe": { "type": "AppLocker" },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
+      "id": "PSM-06",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "SMB1 client disabled (mrxsmb10 disabled, removed from LanmanWorkstation dependencies)",
+      "probe": {
+        "type": "RegistrySet",
+        "items": [
+          {
+            "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mrxsmb10",
+            "name": "Start",
+            "operator": "eq",
+            "expected": 4,
+            "missingIs": "pass"
+          },
+          {
+            "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation",
+            "name": "DependOnService",
+            "operator": "notcontains",
+            "expected": "MRxSmb10",
+            "missingIs": "pass"
+          }
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "SH_PSM_APPLOCK", "find": "PSMConfigureAppLocker" },
-        { "src": "ISPSS_PSM", "find": "All AppLocker rules are defined in the PSMConfigureAppLocker.xml file" },
-        { "src": "SH_PSM_GPO", "find": "AppLocker" }
+        {
+          "src": "PCS_PSM",
+          "find": "setting mrxsmb10 to disabled"
+        }
       ],
-      "remediation": "Run <PSM>\\Hardening\\PSMConfigureAppLocker.ps1. Add custom connector executables to PSMConfigureAppLocker.xml first."
+      "remediation": "Re-run hardening, or disable mrxsmb10 (Start=4) and remove MRxSmb10 from LanmanWorkstation DependOnService.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mrxsmb10",
+          "item": "Start",
+          "type": "REG_DWORD",
+          "expected": "4 (Disabled)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Services\\mrxsmb10' -Name 'Start'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation",
+          "item": "DependOnService",
+          "type": "REG_MULTI_SZ",
+          "expected": "Does NOT contain MRxSmb10 (typically Bowser, MRxSmb20, NSI)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation' -Name 'DependOnService'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > MS Security Guide",
+          "item": "Configure SMB v1 client driver",
+          "expected": "Enabled: Disable driver (recommended)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Windows",
+          "note": "Requires SecGuide.admx."
+        }
+      ]
     },
     {
-      "id": "PSM-10", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "AppLocker", "title": "PSMConfigureAppLocker.xml present (review custom rules after upgrade)",
-      "probe": { "type": "FilePresent", "component": "PSM", "relativePaths": ["Hardening\\PSMConfigureAppLocker.xml", "Hardening\\PSMConfigureAppLocker.ps1"] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "ISPSS_PSM", "find": "PSMConfigureAppLocker.xml" }, { "src": "SH_PSM_UPG", "find": "AppLocker" } ],
-      "remediation": "Restore the AppLocker files from the PSM installation package."
-    },
-    {
-      "id": "PSM-11", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "PSMShadowUsers local group exists (created and used by hardening ACLs)",
-      "probe": { "type": "LocalGroupExists", "group": "PSMShadowUsers" },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "PCS_PSM", "find": "PSMShadowUsers" }, { "src": "SH_PSM_TASKS_LEGACY", "find": "PSMShadowUsers" } ],
-      "remediation": "Re-run PSM installation or hardening."
-    },
-    {
-      "id": "PSM-12", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Folder ACLs for PSMConnect / PSMAdminConnect / PSMShadowUsers on the PSM folder",
-      "probe": { "type": "AclEvidence", "component": "PSM", "principals": ["PSMConnect", "PSMAdminConnect", "PSMShadowUsers"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
+      "id": "PSM-07",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "TLS hardening",
+      "title": "SSL 2.0/3.0 and TLS 1.0/1.1 disabled (Enabled=0, DisabledByDefault=1)",
+      "probe": {
+        "type": "SchannelLegacyDisabled",
+        "protocols": [
+          "SSL 2.0",
+          "SSL 3.0",
+          "TLS 1.0",
+          "TLS 1.1"
+        ],
+        "roles": [
+          "Server",
+          "Client"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "PCS_PSM", "find": "PSMAdminConnect" },
-        { "src": "SH_PSM_TASKS_LEGACY", "find": "modify the permissions manually for PSMConnect and PSMAdminConnect" }
+        {
+          "src": "ISPSS_PSM",
+          "find": "Disables SSL/TLS versions earlier than TLS 1.2"
+        },
+        {
+          "src": "PCS_PSM",
+          "find": "earlier than TLS 1.2"
+        }
       ],
-      "remediation": "If the script warned about PVWA detection, fix the permissions by hand for PSMConnect and PSMAdminConnect on C:\\CyberArk and C:\\InetPub."
+      "remediation": "Run the TLS hardening step. If an older connector needs TLS 1.0/1.1, the docs require a manual registry change afterwards. Document that exception.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "1 (or absent = OS default on)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server' -Name 'Enabled'",
+          "basis": "Windows",
+          "note": "Doc: 'leaves only TLS 1.2 enabled'. Client key same."
+        }
+      ]
     },
     {
-      "id": "PSM-13", "component": "PSM", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Outbound TCP 80/443 to 168.63.129.16 blocked (Windows Firewall rule)",
-      "probe": { "type": "FirewallBlock", "remoteAddress": "168.63.129.16", "direction": "Outbound" },
-      "confidence": "VersionDependent", "failStatus": "NOT DONE",
-      "refs": [ { "src": "PCS_PSM", "find": "168.63.129.16" } ],
-      "remediation": "Re-run PSM hardening. Note: only the Standard page was confirmed. ISPSS applicability was not verified."
-    },
-    {
-      "id": "PSM-14", "component": "PSM", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Xbox-related services disabled (if present)",
-      "probe": { "type": "ServicesDisabled", "names": ["XblAuthManager", "XblGameSave", "XboxNetApiSvc", "XboxGipSvc"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "PCS_PSM", "find": "Xbox" } ],
-      "remediation": "Re-run PSM hardening, or set these services to Disabled. The service names are Windows names, not taken from the doc."
-    },
-    {
-      "id": "PSM-15", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Web application support setting reviewed (SupportWebApplications, default Yes)",
-      "probe": { "type": "ConfigEvidence", "keys": ["SupportWebApplications", "SUPPORT_WEB_APPLICATIONS"] },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_PSM", "find": "SupportWebApplications" }, { "src": "SH_PSM_TASKS_LEGACY", "find": "$SUPPORT_WEB_APPLICATIONS" } ],
-      "remediation": "Disable it if PSM is not used for web applications. Values must be approved by your security team."
-    },
-    {
-      "id": "PSM-20", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Out-of-domain hardening", "title": "PSMShadowUsers has 'Allow log on locally'",
-      "probe": { "type": "UserRight", "right": "SeInteractiveLogonRight", "principals": ["PSMShadowUsers"] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_LEGACY", "find": "Add the PSMShadowUsers group to the Allow log on locally list" }, { "src": "PCS_PSM", "find": "PSMShadowUsers" } ],
-      "remediation": "Enable the out-of-domain step in PSMHardening (default No), or import the PSM INF via gpedit.msc and add the right."
-    },
-    {
-      "id": "PSM-21", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Out-of-domain hardening", "title": "PSMConnect and PSMAdminConnect have 'Allow log on through Remote Desktop Services'",
-      "probe": { "type": "UserRight", "right": "SeRemoteInteractiveLogonRight", "principals": ["PSMConnect", "PSMAdminConnect"], "reportOthers": true },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_LEGACY", "find": "this setting must only be allowed for the PSMConnect and PSMAdminConnect users" } ],
-      "remediation": "Grant the right only to PSMConnect, PSMAdminConnect and named maintenance users. Review any other principals listed in the evidence."
-    },
-    {
-      "id": "PSM-22", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Out-of-domain hardening", "title": "Idle RDS session time limit set",
-      "probe": { "type": "Registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "MaxIdleTime", "operator": "gt", "expected": 0 },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_STAGE", "find": "Sets a time limit for active but idle RDS sessions" }, { "src": "PCS_PSM", "find": "idle" } ],
-      "remediation": "Enable the out-of-domain step, or set 'Set time limit for active but idle RDS sessions'. The Standard doc describes a 2-day value."
-    },
-    {
-      "id": "PSM-23", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Out-of-domain hardening", "title": "Advanced audit policy applied (INF / Advanced Audit CSV import)",
-      "probe": { "type": "AuditPolicy" },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_PSM_STAGE", "find": "Applies advanced audit" }, { "src": "SH_PSM_LEGACY", "find": "Advanced Audit.csv" } ],
-      "remediation": "Import the Advanced Audit CSV into System Audit Policies (Local GPO), or enable the out-of-domain script step."
-    },
-    {
-      "id": "PSM-24", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Out-of-domain hardening", "title": "PSM INF security template imported (Local Security Policy)",
-      "probe": { "type": "Manual" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_PSM_APPLY", "find": "Import Policy" }, { "src": "SH_PSM_STAGE", "find": "Imports an INF file to the local machine" } ],
-      "remediation": "Run gpedit.msc > Computer Configuration > Windows Settings > Security Settings, right-click > Import Policy, and select the PSM INF. Windows keeps no reliable marker of an INF import, so verify by hand with secedit /analyze against the INF."
-    },
-    {
-      "id": "PSM-30", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "RDS policy (GPO in-domain / manual out-of-domain)", "title": "RDS policy: automatic reconnection disabled",
-      "probe": { "type": "Registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "fDisableAutoReconnect", "operator": "eq", "expected": 1 },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_STAGE", "find": "This part of the hardening procedure is not included in the hardening script and must be performed manually" } ],
-      "remediation": "In-domain: comes from the CyberArk PSM GPO. Out-of-domain: set it by hand in gpedit.msc (Remote Desktop Session Host > Connections)."
-    },
-    {
-      "id": "PSM-31", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "RDS policy (GPO in-domain / manual out-of-domain)", "title": "RDS policy: client connection encryption level High",
-      "probe": { "type": "Registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "MinEncryptionLevel", "operator": "eq", "expected": 3 },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_STAGE", "find": "must be performed manually" } ],
-      "remediation": "Set 'Set client connection encryption level' = High via GPO, or in local policy when out of domain."
-    },
-    {
-      "id": "PSM-32", "component": "PSM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "RDS policy (GPO in-domain / manual out-of-domain)", "title": "RDS redirection (clipboard / drive / printer) disabled if not used",
-      "probe": { "type": "RegistrySet", "items": [
-        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "fDisableClip", "operator": "eq", "expected": 1 },
-        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "fDisableCdm", "operator": "eq", "expected": 1 },
-        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services", "name": "fDisableCpm", "operator": "eq", "expected": 1 }
-      ] },
+      "id": "PSM-08",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Remote Desktop Users group cleared (optional: ClearRemoteDesktopUsers, default No)",
+      "probe": {
+        "type": "LocalGroupEmpty",
+        "group": "Remote Desktop Users"
+      },
       "optional": true,
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_APPLY", "find": "If Clipboard/Drive/Printer redirection are not being used, disable them" } ],
-      "remediation": "Conditional step: disable only the redirections your business does not use."
-    },
-    {
-      "id": "PSM-40", "component": "PSM", "platforms": ["SelfHosted"], "domainMode": "InDomain",
-      "stage": "In-domain GPO", "title": "CyberArk PSM hardening GPO applied and winning",
-      "probe": { "type": "GpoApplied", "patterns": ["CyberArk", "PSM", "Hardening"] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_PSM_APPLY", "find": "gpresult /h" } ],
-      "remediation": "Import the GPO in GPMC, link it to the PSM servers OU, run gpupdate /force, then verify with gpresult /h or rsop.msc."
-    },
-    {
-      "id": "CON-01", "component": "Any", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "InDomain",
-      "stage": "Connector hardening (GPO)", "title": "Privilege Cloud Unified Hardening GPO (or PSM-only GPO) applied",
-      "probe": { "type": "GpoApplied", "patterns": ["Unified", "CyberArk", "Connector", "Idira"] },
-      "confidence": "VersionDependent", "failStatus": "NOT DONE",
+      "configKey": "ClearRemoteDesktopUsers",
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
       "refs": [
-        { "src": "PCS_OVERVIEW", "find": "Active Directory domain ('In Domain')" },
-        { "src": "ISPSS_OVERVIEW", "find": "In Domain" },
-        { "src": "PCS_UPG", "find": "Unified Hardening GPO" }
+        {
+          "src": "ISPSS_PSM",
+          "find": "ClearRemoteDesktopUsers (Default: No)"
+        },
+        {
+          "src": "PCS_PSM",
+          "find": "ClearRemoteDesktopUsers"
+        },
+        {
+          "src": "SH_PSM_126",
+          "find": "If you use ActiveX it is recommended to leave the ClearRemoteDesktopUsers parameter set to \"No\""
+        }
       ],
-      "remediation": "Link the latest Unified Hardening GPO (check the marketplace version; the docs cite v2.4.0 and v2.5.0). Legacy CPM/PSM GPOs no longer apply from v13.0."
+      "remediation": "The group should contain only non-admin maintenance users. Review the members listed in the evidence.",
+      "checklist": [
+        {
+          "tool": "Local Users & Groups",
+          "location": "lusrmgr.msc > Groups > Remote Desktop Users",
+          "item": "Members",
+          "expected": "Empty if ClearRemoteDesktopUsers=Yes; otherwise only non-admin maintenance users",
+          "verify": "Get-LocalGroupMember -Group 'Remote Desktop Users'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Hardening config",
+          "location": "<PSM install>\\Hardening\\PSMHardening.ps1",
+          "item": "ClearRemoteDesktopUsers",
+          "expected": "Default No; Yes only if approved (leave No with ActiveX)",
+          "verify": "Select-String -Path '<PSM>\\Hardening\\PSMHardening.ps1' -Pattern 'ClearRemoteDesktopUsers'",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CON-02", "component": "Any", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "InDomain",
-      "stage": "Connector hardening (GPO)", "title": "Connector computer is in a dedicated OU",
-      "probe": { "type": "ComputerOU" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_INSTALL", "find": "make sure all Connector servers are located under the dedicated OU" } ],
-      "remediation": "Move connector servers to a dedicated OU so the GPO does not reach other servers."
+      "id": "PSM-09",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "AppLocker",
+      "title": "AppLocker enforced (AppIDSvc running and effective EXE rules enforced)",
+      "probe": {
+        "type": "AppLocker"
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_APPLOCK",
+          "find": "PSMConfigureAppLocker"
+        },
+        {
+          "src": "ISPSS_PSM",
+          "find": "All AppLocker rules are defined in the PSMConfigureAppLocker.xml file"
+        },
+        {
+          "src": "SH_PSM_GPO",
+          "find": "AppLocker"
+        }
+      ],
+      "remediation": "Run <PSM>\\Hardening\\PSMConfigureAppLocker.ps1. Add custom connector executables to PSMConfigureAppLocker.xml first.",
+      "checklist": [
+        {
+          "tool": "AppLocker",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Application Control Policies > AppLocker > Executable Rules",
+          "item": "Rules + enforcement",
+          "expected": "Rules from PSMConfigureAppLocker.xml present; enforcement = Enforce rules",
+          "verify": "Get-AppLockerPolicy -Effective -Xml > C:\\temp\\applocker.xml",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\AppIDSvc",
+          "item": "AppIDSvc",
+          "type": "REG_DWORD Start",
+          "expected": "Automatic and Running (Application Identity)",
+          "verify": "Get-Service -Name 'AppIDSvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        }
+      ]
     },
     {
-      "id": "CON-03", "component": "Any", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Connector hardening (INF)", "title": "Connector INF hardening imported (out of domain)",
-      "probe": { "type": "Manual" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_OVERVIEW", "find": "Non-Active Directory domain ('Out of Domain')" }, { "src": "ISPSS_OVERVIEW", "find": "Out of Domain" } ],
-      "remediation": "Import the connector INF via Local Security Policy, then verify with secedit /analyze."
+      "id": "PSM-10",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "AppLocker",
+      "title": "PSMConfigureAppLocker.xml present (review custom rules after upgrade)",
+      "probe": {
+        "type": "FilePresent",
+        "component": "PSM",
+        "relativePaths": [
+          "Hardening\\PSMConfigureAppLocker.xml",
+          "Hardening\\PSMConfigureAppLocker.ps1"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "ISPSS_PSM",
+          "find": "PSMConfigureAppLocker.xml"
+        },
+        {
+          "src": "SH_PSM_UPG",
+          "find": "AppLocker"
+        }
+      ],
+      "remediation": "Restore the AppLocker files from the PSM installation package.",
+      "checklist": [
+        {
+          "tool": "Files & Logs",
+          "location": "<PSM install>\\Hardening",
+          "item": "PSMConfigureAppLocker.xml, PSMConfigureAppLocker.ps1",
+          "expected": "Both present; custom rules (e.g. Universal Connector exes) re-merged after upgrade",
+          "verify": "Test-Path '<PSM>\\Hardening\\PSMConfigureAppLocker.xml'",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CON-04", "component": "Any", "platforms": ["PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Connector upgrade", "title": "GPO hardening updated BEFORE component upgrade; GPO customizations re-applied",
-      "probe": { "type": "Manual" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_UPG", "find": "ensure that you first update the GPO hardening" }, { "src": "ISPSS_UPG", "find": "customizations" } ],
-      "remediation": "Process check: confirm against change records."
+      "id": "PSM-11",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "PSMShadowUsers local group exists (created and used by hardening ACLs)",
+      "probe": {
+        "type": "LocalGroupExists",
+        "group": "PSMShadowUsers"
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "PCS_PSM",
+          "find": "PSMShadowUsers"
+        },
+        {
+          "src": "SH_PSM_TASKS_LEGACY",
+          "find": "PSMShadowUsers"
+        }
+      ],
+      "remediation": "Re-run PSM installation or hardening.",
+      "checklist": [
+        {
+          "tool": "Local Users & Groups",
+          "location": "lusrmgr.msc > Groups",
+          "item": "PSMShadowUsers",
+          "expected": "Group exists",
+          "verify": "Get-LocalGroup -Name PSMShadowUsers",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-01", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "CPM_Hardening.ps1 has run and its log has no errors",
-      "probe": { "type": "HardeningLog", "component": "CPM", "folder": "InstallationAutomation", "patterns": ["*.log"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_RUN", "find": "CPM_Hardening" }, { "src": "PCS_CPM", "find": "CPM_Hardening_Config.xml" } ],
-      "remediation": "Run CPM\\InstallationAutomation CPM_Hardening.ps1 as Administrator. If PVWA is on the same host, run it after the PVWA hardening."
+      "id": "PSM-12",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Folder ACLs for PSMConnect / PSMAdminConnect / PSMShadowUsers on the PSM folder",
+      "probe": {
+        "type": "AclEvidence",
+        "component": "PSM",
+        "principals": [
+          "PSMConnect",
+          "PSMAdminConnect",
+          "PSMShadowUsers"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_PSM",
+          "find": "PSMAdminConnect"
+        },
+        {
+          "src": "SH_PSM_TASKS_LEGACY",
+          "find": "modify the permissions manually for PSMConnect and PSMAdminConnect"
+        }
+      ],
+      "remediation": "If the script warned about PVWA detection, fix the permissions by hand for PSMConnect and PSMAdminConnect on C:\\CyberArk and C:\\InetPub.",
+      "checklist": [
+        {
+          "tool": "File system ACL",
+          "location": "<PSM install folder>; also C:\\CyberArk and C:\\InetPub (legacy doc)",
+          "item": "ACEs for PSMConnect, PSMAdminConnect, PSMShadowUsers",
+          "expected": "Allow/Deny rules written by the hardening script present",
+          "verify": "icacls '<PSM>'",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-02", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "Hardening re-applied after the last CPM upgrade",
-      "probe": { "type": "ReappliedAfterUpgrade", "component": "CPM", "folder": "InstallationAutomation", "patterns": ["*.log"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_UPG", "find": "-FromVersion" } ],
-      "remediation": "Run CPM_Hardening.ps1 -FromVersion <previous version> after an upgrade."
+      "id": "PSM-13",
+      "component": "PSM",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Outbound TCP 80/443 to 168.63.129.16 blocked (Windows Firewall rule)",
+      "probe": {
+        "type": "FirewallBlock",
+        "remoteAddress": "168.63.129.16",
+        "direction": "Outbound"
+      },
+      "confidence": "VersionDependent",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "PCS_PSM",
+          "find": "168.63.129.16"
+        }
+      ],
+      "remediation": "Re-run PSM hardening. Note: only the Standard page was confirmed. ISPSS applicability was not verified.",
+      "checklist": [
+        {
+          "tool": "Windows Firewall",
+          "location": "wf.msc > Outbound Rules",
+          "item": "Block rule to 168.63.129.16",
+          "expected": "Enabled, Action = Block, Protocol TCP, RemotePort 80,443, RemoteAddress 168.63.129.16",
+          "verify": "Get-NetFirewallRule -Direction Outbound -Action Block -Enabled True | ? { ($_ | Get-NetFirewallAddressFilter).RemoteAddress -contains '168.63.129.16' }",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-03", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Hardening script", "title": "IsPSMInstalled=True in CPM_Hardening_Config.xml when PSM is on the same server",
-      "probe": { "type": "PsmCoexistence", "key": "IsPSMInstalled" },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "IsPSMInstalled" } ],
-      "remediation": "Set IsPSMInstalled=True BEFORE running the CPM hardening, because the INF import, server roles and RDS steps affect PSM."
+      "id": "PSM-14",
+      "component": "PSM",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Xbox-related services disabled (if present)",
+      "probe": {
+        "type": "ServicesDisabled",
+        "names": [
+          "XblAuthManager",
+          "XblGameSave",
+          "XboxNetApiSvc",
+          "XboxGipSvc"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "PCS_PSM",
+          "find": "Xbox"
+        }
+      ],
+      "remediation": "Re-run PSM hardening, or set these services to Disabled. The service names are Windows names, not taken from the doc.",
+      "checklist": [
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\XblAuthManager",
+          "item": "XblAuthManager",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4) if present",
+          "verify": "Get-Service -Name 'XblAuthManager' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\XblGameSave",
+          "item": "XblGameSave",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4) if present",
+          "verify": "Get-Service -Name 'XblGameSave' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\XboxNetApiSvc",
+          "item": "XboxNetApiSvc",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4) if present",
+          "verify": "Get-Service -Name 'XboxNetApiSvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\XboxGipSvc",
+          "item": "XboxGipSvc",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4) if present",
+          "verify": "Get-Service -Name 'XboxGipSvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Task Scheduler",
+          "location": "Task Scheduler Library > Microsoft > XblGameSave",
+          "item": "XblGameSaveTask",
+          "expected": "Disabled if present",
+          "verify": "Get-ScheduledTask -TaskPath '\\Microsoft\\XblGameSave\\'",
+          "basis": "Windows"
+        }
+      ]
     },
     {
-      "id": "CPM-04", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Local Windows service users", "title": "CPM local service users exist (PasswordManagerUser, ScannerUser)",
-      "probe": { "type": "LocalUsers", "names": ["PasswordManagerUser", "ScannerUser"] },
+      "id": "PSM-15",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Web application support setting reviewed (SupportWebApplications, default Yes)",
+      "probe": {
+        "type": "ConfigEvidence",
+        "keys": [
+          "SupportWebApplications",
+          "SUPPORT_WEB_APPLICATIONS"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_PSM",
+          "find": "SupportWebApplications"
+        },
+        {
+          "src": "SH_PSM_TASKS_LEGACY",
+          "find": "$SUPPORT_WEB_APPLICATIONS"
+        }
+      ],
+      "remediation": "Disable it if PSM is not used for web applications. Values must be approved by your security team.",
+      "checklist": [
+        {
+          "tool": "Hardening config",
+          "location": "<PSM install>\\Hardening\\PSMHardening.ps1",
+          "item": "SupportWebApplications / $SUPPORT_WEB_APPLICATIONS",
+          "expected": "Default Yes; set No if PSM is not used for web apps (security-team approved)",
+          "verify": "Select-String -Path '<PSM>\\Hardening\\PSMHardening.ps1' -Pattern 'SUPPORT_WEB_APPLICATIONS|SupportWebApplications'",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "PSM-20",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Out-of-domain hardening",
+      "title": "PSMShadowUsers has 'Allow log on locally'",
+      "probe": {
+        "type": "UserRight",
+        "right": "SeInteractiveLogonRight",
+        "principals": [
+          "PSMShadowUsers"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_LEGACY",
+          "find": "Add the PSMShadowUsers group to the Allow log on locally list"
+        },
+        {
+          "src": "PCS_PSM",
+          "find": "PSMShadowUsers"
+        }
+      ],
+      "remediation": "Enable the out-of-domain step in PSMHardening (default No), or import the PSM INF via gpedit.msc and add the right.",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > User Rights Assignment",
+          "item": "Allow log on locally (SeInteractiveLogonRight)",
+          "expected": "Includes PSMShadowUsers",
+          "verify": "secedit /export /areas USER_RIGHTS /cfg C:\\temp\\ur.inf ; Select-String SeInteractiveLogonRight C:\\temp\\ur.inf",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "PSM-21",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Out-of-domain hardening",
+      "title": "PSMConnect and PSMAdminConnect have 'Allow log on through Remote Desktop Services'",
+      "probe": {
+        "type": "UserRight",
+        "right": "SeRemoteInteractiveLogonRight",
+        "principals": [
+          "PSMConnect",
+          "PSMAdminConnect"
+        ],
+        "reportOthers": true
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_LEGACY",
+          "find": "this setting must only be allowed for the PSMConnect and PSMAdminConnect users"
+        }
+      ],
+      "remediation": "Grant the right only to PSMConnect, PSMAdminConnect and named maintenance users. Review any other principals listed in the evidence.",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > User Rights Assignment",
+          "item": "Allow log on through Remote Desktop Services (SeRemoteInteractiveLogonRight)",
+          "expected": "ONLY PSMConnect, PSMAdminConnect and named maintenance users",
+          "verify": "secedit /export /areas USER_RIGHTS /cfg C:\\temp\\ur.inf ; Select-String SeRemoteInteractiveLogonRight C:\\temp\\ur.inf",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "PSM-22",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Out-of-domain hardening",
+      "title": "Idle RDS session time limit set",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "name": "MaxIdleTime",
+        "operator": "gt",
+        "expected": 0
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_STAGE",
+          "find": "Sets a time limit for active but idle RDS sessions"
+        },
+        {
+          "src": "PCS_PSM",
+          "find": "idle"
+        }
+      ],
+      "remediation": "Enable the out-of-domain step, or set 'Set time limit for active but idle RDS sessions'. The Standard doc describes a 2-day value.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Session Time Limits",
+          "item": "Set time limit for active but idle Remote Desktop Services sessions",
+          "expected": "Enabled (Standard doc describes 2 days)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\MaxIdleTime"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+          "item": "MaxIdleTime",
+          "type": "REG_DWORD",
+          "expected": "> 0, in milliseconds (2 days = 172800000)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services' -Name 'MaxIdleTime'",
+          "basis": "Windows"
+        }
+      ]
+    },
+    {
+      "id": "PSM-23",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Out-of-domain hardening",
+      "title": "Advanced audit policy applied (INF / Advanced Audit CSV import)",
+      "probe": {
+        "type": "AuditPolicy"
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_PSM_STAGE",
+          "find": "Applies advanced audit"
+        },
+        {
+          "src": "SH_PSM_LEGACY",
+          "find": "Advanced Audit.csv"
+        }
+      ],
+      "remediation": "Import the Advanced Audit CSV into System Audit Policies (Local GPO), or enable the out-of-domain script step.",
+      "checklist": [
+        {
+          "tool": "Advanced Audit Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > System Audit Policies",
+          "item": "Subcategories",
+          "expected": "Match the CyberArk 'Advanced Audit.csv' shipped with the hardening package",
+          "verify": "auditpol /get /category:*  (compare with the CSV)",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "PSM-24",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Out-of-domain hardening",
+      "title": "PSM INF security template imported (Local Security Policy)",
+      "probe": {
+        "type": "Manual"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_PSM_APPLY",
+          "find": "Import Policy"
+        },
+        {
+          "src": "SH_PSM_STAGE",
+          "find": "Imports an INF file to the local machine"
+        }
+      ],
+      "remediation": "Run gpedit.msc > Computer Configuration > Windows Settings > Security Settings, right-click > Import Policy, and select the PSM INF. Windows keeps no reliable marker of an INF import, so verify by hand with secedit /analyze against the INF.",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "gpedit.msc > Computer Configuration > Windows Settings > Security Settings > Import Policy",
+          "item": "PSM INF template",
+          "expected": "Imported; secedit /analyze reports no mismatches",
+          "verify": "secedit /analyze /db C:\\temp\\psm.sdb /cfg '<PSM INF>' /log C:\\temp\\psm.log",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "PSM-30",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "RDS policy (GPO in-domain / manual out-of-domain)",
+      "title": "RDS policy: automatic reconnection disabled",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "name": "fDisableAutoReconnect",
+        "operator": "eq",
+        "expected": 1
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_STAGE",
+          "find": "This part of the hardening procedure is not included in the hardening script and must be performed manually"
+        }
+      ],
+      "remediation": "In-domain: comes from the CyberArk PSM GPO. Out-of-domain: set it by hand in gpedit.msc (Remote Desktop Session Host > Connections).",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Connections",
+          "item": "Automatic reconnection",
+          "expected": "Disabled",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableAutoReconnect = 1"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+          "item": "fDisableAutoReconnect",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services' -Name 'fDisableAutoReconnect'",
+          "basis": "Windows"
+        }
+      ]
+    },
+    {
+      "id": "PSM-31",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "RDS policy (GPO in-domain / manual out-of-domain)",
+      "title": "RDS policy: client connection encryption level High",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "name": "MinEncryptionLevel",
+        "operator": "eq",
+        "expected": 3
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_STAGE",
+          "find": "must be performed manually"
+        }
+      ],
+      "remediation": "Set 'Set client connection encryption level' = High via GPO, or in local policy when out of domain.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Security",
+          "item": "Set client connection encryption level",
+          "expected": "Enabled: High Level",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\MinEncryptionLevel = 3"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+          "item": "MinEncryptionLevel",
+          "type": "REG_DWORD",
+          "expected": "3",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services' -Name 'MinEncryptionLevel'",
+          "basis": "Windows"
+        }
+      ]
+    },
+    {
+      "id": "PSM-32",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "RDS policy (GPO in-domain / manual out-of-domain)",
+      "title": "RDS redirection (clipboard / drive / printer) disabled if not used",
+      "probe": {
+        "type": "RegistrySet",
+        "items": [
+          {
+            "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+            "name": "fDisableClip",
+            "operator": "eq",
+            "expected": 1
+          },
+          {
+            "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+            "name": "fDisableCdm",
+            "operator": "eq",
+            "expected": 1
+          },
+          {
+            "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+            "name": "fDisableCpm",
+            "operator": "eq",
+            "expected": 1
+          }
+        ]
+      },
+      "optional": true,
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_APPLY",
+          "find": "If Clipboard/Drive/Printer redirection are not being used, disable them"
+        }
+      ],
+      "remediation": "Conditional step: disable only the redirections your business does not use.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Device and Resource Redirection",
+          "item": "Do not allow Clipboard redirection",
+          "expected": "Enabled (if clipboard not used)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip = 1"
+        },
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Device and Resource Redirection",
+          "item": "Do not allow drive redirection",
+          "expected": "Enabled (if drives not used)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableCdm = 1"
+        },
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Printer Redirection",
+          "item": "Do not allow client printer redirection",
+          "expected": "Enabled (if printers not used)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Doc",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableCpm = 1"
+        }
+      ]
+    },
+    {
+      "id": "PSM-40",
+      "component": "PSM",
+      "platforms": [
+        "SelfHosted"
+      ],
+      "domainMode": "InDomain",
+      "stage": "In-domain GPO",
+      "title": "CyberArk PSM hardening GPO applied and winning",
+      "probe": {
+        "type": "GpoApplied",
+        "patterns": [
+          "CyberArk",
+          "PSM",
+          "Hardening"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_PSM_APPLY",
+          "find": "gpresult /h"
+        }
+      ],
+      "remediation": "Import the GPO in GPMC, link it to the PSM servers OU, run gpupdate /force, then verify with gpresult /h or rsop.msc.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "gpresult /scope computer /r > Applied Group Policy Objects",
+          "item": "CyberArk PSM hardening GPO",
+          "expected": "Listed as applied (and winning in RSoP); linked to the PSM servers OU",
+          "verify": "gpupdate /force ; gpresult /scope computer /r",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CON-01",
+      "component": "Any",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "InDomain",
+      "stage": "Connector hardening (GPO)",
+      "title": "Privilege Cloud Unified Hardening GPO (or PSM-only GPO) applied",
+      "probe": {
+        "type": "GpoApplied",
+        "patterns": [
+          "Unified",
+          "CyberArk",
+          "Connector",
+          "Idira"
+        ]
+      },
+      "confidence": "VersionDependent",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "PCS_OVERVIEW",
+          "find": "Active Directory domain ('In Domain')"
+        },
+        {
+          "src": "ISPSS_OVERVIEW",
+          "find": "In Domain"
+        },
+        {
+          "src": "PCS_UPG",
+          "find": "Unified Hardening GPO"
+        }
+      ],
+      "remediation": "Link the latest Unified Hardening GPO (check the marketplace version; the docs cite v2.4.0 and v2.5.0). Legacy CPM/PSM GPOs no longer apply from v13.0.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "gpresult /scope computer /r > Applied Group Policy Objects",
+          "item": "Privilege Cloud Connector Unified Hardening GPO (or In-Domain PSM GPO for PSM-only)",
+          "expected": "Listed as applied; legacy CPM/PSM GPO links removed (v13.0+)",
+          "verify": "gpresult /scope computer /r",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CON-02",
+      "component": "Any",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "InDomain",
+      "stage": "Connector hardening (GPO)",
+      "title": "Connector computer is in a dedicated OU",
+      "probe": {
+        "type": "ComputerOU"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_INSTALL",
+          "find": "make sure all Connector servers are located under the dedicated OU"
+        }
+      ],
+      "remediation": "Move connector servers to a dedicated OU so the GPO does not reach other servers.",
+      "checklist": [
+        {
+          "tool": "Active Directory",
+          "location": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Group Policy\\State\\Machine > Distinguished-Name",
+          "item": "Computer OU",
+          "expected": "Dedicated connector OU (GPO reaches no other servers)",
+          "verify": "([adsisearcher]\"(cn=$env:COMPUTERNAME)\").FindOne().Path",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CON-03",
+      "component": "Any",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Connector hardening (INF)",
+      "title": "Connector INF hardening imported (out of domain)",
+      "probe": {
+        "type": "Manual"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_OVERVIEW",
+          "find": "Non-Active Directory domain ('Out of Domain')"
+        },
+        {
+          "src": "ISPSS_OVERVIEW",
+          "find": "Out of Domain"
+        }
+      ],
+      "remediation": "Import the connector INF via Local Security Policy, then verify with secedit /analyze.",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "gpedit.msc > Security Settings > Import Policy",
+          "item": "Connector INF",
+          "expected": "Imported; secedit /analyze clean",
+          "verify": "secedit /analyze /db C:\\temp\\con.sdb /cfg '<Connector INF>' /log C:\\temp\\con.log",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CON-04",
+      "component": "Any",
+      "platforms": [
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Connector upgrade",
+      "title": "GPO hardening updated BEFORE component upgrade; GPO customizations re-applied",
+      "probe": {
+        "type": "Manual"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_UPG",
+          "find": "ensure that you first update the GPO hardening"
+        },
+        {
+          "src": "ISPSS_UPG",
+          "find": "customizations"
+        }
+      ],
+      "remediation": "Process check: confirm against change records.",
+      "checklist": [
+        {
+          "tool": "Change records",
+          "location": "Upgrade runbook",
+          "item": "GPO update before component upgrade; GPO customisations re-applied",
+          "expected": "Evidence in change ticket",
+          "verify": "n/a (process)",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CPM-01",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "CPM_Hardening.ps1 has run and its log has no errors",
+      "probe": {
+        "type": "HardeningLog",
+        "component": "CPM",
+        "folder": "InstallationAutomation",
+        "patterns": [
+          "*.log"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_RUN",
+          "find": "CPM_Hardening"
+        },
+        {
+          "src": "PCS_CPM",
+          "find": "CPM_Hardening_Config.xml"
+        }
+      ],
+      "remediation": "Run CPM\\InstallationAutomation CPM_Hardening.ps1 as Administrator. If PVWA is on the same host, run it after the PVWA hardening.",
+      "checklist": [
+        {
+          "tool": "Files & Logs",
+          "location": "<CPM install>\\InstallationAutomation\\*.log",
+          "item": "Newest hardening log",
+          "expected": "Exists; no Error / Failed lines",
+          "verify": "Get-ChildItem '<CPM>\\InstallationAutomation' -Recurse -Filter *.log | Sort LastWriteTime | Select -Last 1 | Select-String 'error|failed'",
+          "basis": "Doc",
+          "note": "Log location inferred."
+        }
+      ]
+    },
+    {
+      "id": "CPM-02",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "Hardening re-applied after the last CPM upgrade",
+      "probe": {
+        "type": "ReappliedAfterUpgrade",
+        "component": "CPM",
+        "folder": "InstallationAutomation",
+        "patterns": [
+          "*.log"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_UPG",
+          "find": "-FromVersion"
+        }
+      ],
+      "remediation": "Run CPM_Hardening.ps1 -FromVersion <previous version> after an upgrade.",
+      "checklist": [
+        {
+          "tool": "Files & Logs",
+          "location": "<CPM install>\\InstallationAutomation\\*.log vs <CPM install>\\*.exe",
+          "item": "Timestamps",
+          "expected": "Hardening re-run (CPM_Hardening.ps1 -FromVersion <old>) after last upgrade",
+          "verify": "compare LastWriteTime",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CPM-03",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Hardening script",
+      "title": "IsPSMInstalled=True in CPM_Hardening_Config.xml when PSM is on the same server",
+      "probe": {
+        "type": "PsmCoexistence",
+        "key": "IsPSMInstalled"
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "IsPSMInstalled"
+        }
+      ],
+      "remediation": "Set IsPSMInstalled=True BEFORE running the CPM hardening, because the INF import, server roles and RDS steps affect PSM.",
+      "checklist": [
+        {
+          "tool": "Hardening config",
+          "location": "<CPM install>\\InstallationAutomation\\CPM_Hardening_Config.xml",
+          "item": "IsPSMInstalled",
+          "expected": "True when PSM is on the same server (set BEFORE running)",
+          "verify": "Select-String -Path '<CPM>\\InstallationAutomation\\CPM_Hardening_Config.xml' -Pattern 'IsPSMInstalled'",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "CPM-04",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Local Windows service users",
+      "title": "CPM local service users exist (PasswordManagerUser, ScannerUser)",
+      "probe": {
+        "type": "LocalUsers",
+        "names": [
+          "PasswordManagerUser",
+          "ScannerUser"
+        ]
+      },
       "configKey": "PasswordManagerServicesLocalUser",
-      "confidence": "VersionDependent", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "PasswordManagerUser" }, { "src": "SH_CPM_TASKS13", "find": "PluginManagerUser" }, { "src": "PCS_CPM", "find": "PasswordManagerUser" } ],
-      "remediation": "Enable the PasswordManagerServicesLocalUser step. The latest docs also list PluginManagerUser; v13.0 creates it at install time."
+      "confidence": "VersionDependent",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "PasswordManagerUser"
+        },
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "PluginManagerUser"
+        },
+        {
+          "src": "PCS_CPM",
+          "find": "PasswordManagerUser"
+        }
+      ],
+      "remediation": "Enable the PasswordManagerServicesLocalUser step. The latest docs also list PluginManagerUser; v13.0 creates it at install time.",
+      "checklist": [
+        {
+          "tool": "Local Users & Groups",
+          "location": "lusrmgr.msc > Users",
+          "item": "PasswordManagerUser, ScannerUser (latest docs also PluginManagerUser)",
+          "expected": "Exist",
+          "verify": "Get-LocalUser PasswordManagerUser,ScannerUser,PluginManagerUser",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-05", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Local Windows service users", "title": "'Log on as a service' granted to PasswordManagerUser and ScannerUser",
-      "probe": { "type": "UserRight", "right": "SeServiceLogonRight", "principals": ["PasswordManagerUser", "ScannerUser"], "reportOthers": true },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS13", "find": "Log on as a service" } ],
-      "remediation": "Re-run the CPM hardening. Review any other principals that hold the right (PVWA users are legitimate on combined hosts)."
+      "id": "CPM-05",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Local Windows service users",
+      "title": "'Log on as a service' granted to PasswordManagerUser and ScannerUser",
+      "probe": {
+        "type": "UserRight",
+        "right": "SeServiceLogonRight",
+        "principals": [
+          "PasswordManagerUser",
+          "ScannerUser"
+        ],
+        "reportOthers": true
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "Log on as a service"
+        }
+      ],
+      "remediation": "Re-run the CPM hardening. Review any other principals that hold the right (PVWA users are legitimate on combined hosts).",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > User Rights Assignment",
+          "item": "Log on as a service (SeServiceLogonRight)",
+          "expected": "Includes PasswordManagerUser and ScannerUser; other holders reviewed",
+          "verify": "secedit /export /areas USER_RIGHTS /cfg C:\\temp\\ur.inf ; Select-String SeServiceLogonRight C:\\temp\\ur.inf",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > User Rights Assignment",
+          "item": "Allow log on locally (SeInteractiveLogonRight)",
+          "expected": "Includes the CPM user (latest doc: without it CPM cannot manage accounts)",
+          "verify": "secedit /export /areas USER_RIGHTS /cfg C:\\temp\\ur.inf ; Select-String SeInteractiveLogonRight C:\\temp\\ur.inf",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-06", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Disables DEP for executables", "title": "DEP disabled for PMTerminal.exe, Telnet.exe, Plink.exe",
-      "probe": { "type": "DepExclusion", "executables": ["PMTerminal.exe", "Telnet.exe", "Plink.exe"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
-      "refs": [ { "src": "PCS_CPM", "find": "PMTerminal.exe" }, { "src": "SH_CPM_TASKS", "find": "DEP" } ],
-      "remediation": "Re-run the CPM hardening step. The probe checks AppCompatFlags\\Layers for DisableNXShowUI, which is an inferred mechanism."
+      "id": "CPM-06",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Disables DEP for executables",
+      "title": "DEP disabled for PMTerminal.exe, Telnet.exe, Plink.exe",
+      "probe": {
+        "type": "DepExclusion",
+        "executables": [
+          "PMTerminal.exe",
+          "Telnet.exe",
+          "Plink.exe"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "PCS_CPM",
+          "find": "PMTerminal.exe"
+        },
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "DEP"
+        }
+      ],
+      "remediation": "Re-run the CPM hardening step. The probe checks AppCompatFlags\\Layers for DisableNXShowUI, which is an inferred mechanism.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers",
+          "item": "<full path>\\PMTerminal.exe | Telnet.exe | Plink.exe",
+          "type": "REG_SZ",
+          "expected": "Data contains DisableNXShowUI",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers' -Name '<full path>\\PMTerminal.exe | Telnet.exe | Plink.exe'",
+          "basis": "Windows",
+          "note": "The doc names the executables; this registry mechanism is inferred."
+        }
+      ]
     },
     {
-      "id": "CPM-07", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Disables services", "title": "Unneeded services disabled (RRAS, SNMP Trap, SAC Helper, WER, WinHTTP Auto-Proxy)",
-      "probe": { "type": "ServicesDisabled", "displayNames": ["Routing and Remote Access", "SNMP Trap", "Special Administration Console Helper", "Windows Error Reporting Service", "WinHTTP Web Proxy Auto-Discovery Service"] },
-      "confidence": "VersionDependent", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS13", "find": "Special Administration Console Helper" }, { "src": "ISPSS_CPM", "find": "Windows Error Reporting" } ],
-      "remediation": "Re-run the hardening step, or set these services to Disabled."
+      "id": "CPM-07",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Disables services",
+      "title": "Unneeded services disabled (RRAS, SNMP Trap, SAC Helper, WER, WinHTTP Auto-Proxy)",
+      "probe": {
+        "type": "ServicesDisabled",
+        "displayNames": [
+          "Routing and Remote Access",
+          "SNMP Trap",
+          "Special Administration Console Helper",
+          "Windows Error Reporting Service",
+          "WinHTTP Web Proxy Auto-Discovery Service"
+        ]
+      },
+      "confidence": "VersionDependent",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "Special Administration Console Helper"
+        },
+        {
+          "src": "ISPSS_CPM",
+          "find": "Windows Error Reporting"
+        }
+      ],
+      "remediation": "Re-run the hardening step, or set these services to Disabled.",
+      "checklist": [
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\RemoteAccess",
+          "item": "RemoteAccess",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'RemoteAccess' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\SNMPTRAP",
+          "item": "SNMPTRAP",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'SNMPTRAP' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\sacsvr",
+          "item": "sacsvr",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'sacsvr' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\WerSvc",
+          "item": "WerSvc",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'WerSvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinHttpAutoProxySvc",
+          "item": "WinHttpAutoProxySvc",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'WinHttpAutoProxySvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        }
+      ]
     },
     {
-      "id": "CPM-08", "component": "CPM", "platforms": ["SelfHosted"], "domainMode": "Any",
-      "stage": "Disables services", "title": "Smart Card services disabled (listed in v13.0 docs only)",
-      "probe": { "type": "ServicesDisabled", "displayNames": ["Smart Card", "Smart Card Removal Policy"] },
-      "confidence": "VersionDependent", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS13", "find": "Smart Card Removal Policy" } ],
-      "remediation": "Version-dependent: the latest ISPSS list omits these services. Check your version's page."
+      "id": "CPM-08",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted"
+      ],
+      "domainMode": "Any",
+      "stage": "Disables services",
+      "title": "Smart Card services disabled (listed in v13.0 docs only)",
+      "probe": {
+        "type": "ServicesDisabled",
+        "displayNames": [
+          "Smart Card",
+          "Smart Card Removal Policy"
+        ]
+      },
+      "confidence": "VersionDependent",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "Smart Card Removal Policy"
+        }
+      ],
+      "remediation": "Version-dependent: the latest ISPSS list omits these services. Check your version's page.",
+      "checklist": [
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\SCardSvr",
+          "item": "SCardSvr",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'SCardSvr' | Select Name,StartType,Status",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Services",
+          "location": "Computer Configuration > Windows Settings > Security Settings > System Services  |  HKLM\\SYSTEM\\CurrentControlSet\\Services\\SCPolicySvc",
+          "item": "SCPolicySvc",
+          "type": "REG_DWORD Start",
+          "expected": "Disabled (Start = 4)",
+          "verify": "Get-Service -Name 'SCPolicySvc' | Select Name,StartType,Status",
+          "basis": "Windows"
+        }
+      ]
     },
     {
-      "id": "CPM-09", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "TLS", "title": "SSL 2.0/3.0 and TLS 1.0/1.1 disabled",
-      "probe": { "type": "SchannelLegacyDisabled", "protocols": ["SSL 2.0", "SSL 3.0", "TLS 1.0", "TLS 1.1"], "roles": ["Server", "Client"] },
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS13", "find": "disables older SSL/TLS versions as they have known vulnerabilities" } ],
-      "remediation": "Re-run the hardening TLS step."
+      "id": "CPM-09",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "TLS",
+      "title": "SSL 2.0/3.0 and TLS 1.0/1.1 disabled",
+      "probe": {
+        "type": "SchannelLegacyDisabled",
+        "protocols": [
+          "SSL 2.0",
+          "SSL 3.0",
+          "TLS 1.0",
+          "TLS 1.1"
+        ],
+        "roles": [
+          "Server",
+          "Client"
+        ]
+      },
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "disables older SSL/TLS versions as they have known vulnerabilities"
+        }
+      ],
+      "remediation": "Re-run the hardening TLS step.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client' -Name 'Enabled'",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+          "item": "DisabledByDefault",
+          "type": "REG_DWORD",
+          "expected": "1",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client' -Name 'DisabledByDefault'",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-10", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "TLS", "title": "TLS 1.2 / TLS 1.3 state (latest docs: script enables TLS 1.3; TLSVersions=UseTLS1_2 for 1.2)",
-      "probe": { "type": "SchannelEvidence", "protocols": ["TLS 1.2", "TLS 1.3"] },
+      "id": "CPM-10",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "TLS",
+      "title": "TLS 1.2 / TLS 1.3 state (latest docs: script enables TLS 1.3; TLSVersions=UseTLS1_2 for 1.2)",
+      "probe": {
+        "type": "SchannelEvidence",
+        "protocols": [
+          "TLS 1.2",
+          "TLS 1.3"
+        ]
+      },
       "configKey": "TLSVersions",
-      "confidence": "VersionDependent", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "UseTLS1_2" }, { "src": "SH_CPM_TASKS13", "find": "enables TLS 1.2" } ],
-      "remediation": "Confirm that the enabled protocol matches what your Vault/connector version supports."
+      "confidence": "VersionDependent",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "UseTLS1_2"
+        },
+        {
+          "src": "SH_CPM_TASKS13",
+          "find": "enables TLS 1.2"
+        }
+      ],
+      "remediation": "Confirm that the enabled protocol matches what your Vault/connector version supports.",
+      "checklist": [
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "Per your version: 1 if TLSVersions=UseTLS1_2",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server' -Name 'Enabled'",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.3\\Server",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "1 on latest (doc: script enables TLS 1.3)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.3\\Server' -Name 'Enabled'",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Hardening config",
+          "location": "<CPM install>\\InstallationAutomation\\CPM_Hardening_Config.xml",
+          "item": "TLSVersions",
+          "expected": "Approved value (e.g. UseTLS1_2)",
+          "verify": "Select-String ... -Pattern 'TLSVersions'",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-11", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "FIPS", "title": "FIPS cryptography enabled (optional: EnableFIPSCryptography, default No)",
-      "probe": { "type": "Registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\FipsAlgorithmPolicy", "name": "Enabled", "operator": "eq", "expected": 1 },
-      "optional": true, "configKey": "EnableFIPSCryptography",
-      "confidence": "Documented", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "EnableFIPSCryptography" } ],
-      "remediation": "Only if required: set EnableFIPSCryptography=Yes in CPM_Hardening_Config.xml before running."
+      "id": "CPM-11",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "FIPS",
+      "title": "FIPS cryptography enabled (optional: EnableFIPSCryptography, default No)",
+      "probe": {
+        "type": "Registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\FipsAlgorithmPolicy",
+        "name": "Enabled",
+        "operator": "eq",
+        "expected": 1
+      },
+      "optional": true,
+      "configKey": "EnableFIPSCryptography",
+      "confidence": "Documented",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "EnableFIPSCryptography"
+        }
+      ],
+      "remediation": "Only if required: set EnableFIPSCryptography=Yes in CPM_Hardening_Config.xml before running.",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options",
+          "item": "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing",
+          "expected": "Enabled ONLY if EnableFIPSCryptography=Yes (optional, default No)",
+          "verify": "secpol.msc",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\FipsAlgorithmPolicy",
+          "item": "Enabled",
+          "type": "REG_DWORD",
+          "expected": "1 if FIPS required, else 0",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\FipsAlgorithmPolicy' -Name 'Enabled'",
+          "basis": "Windows"
+        }
+      ]
     },
     {
-      "id": "CPM-12", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Validates server roles", "title": "Only minimum server roles/features installed",
-      "probe": { "type": "WindowsFeatures" },
+      "id": "CPM-12",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Validates server roles",
+      "title": "Only minimum server roles/features installed",
+      "probe": {
+        "type": "WindowsFeatures"
+      },
       "configKey": "ValidateServerRoles",
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "Only the minimum roles and features that are required should be defined on the CPM server" }, { "src": "PCS_UPG", "find": "ValidateServerRoles" } ],
-      "remediation": "Review the installed features in the evidence. Privilege Cloud upgrade guidance sets ValidateServerRoles=No."
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "Only the minimum roles and features that are required should be defined on the CPM server"
+        },
+        {
+          "src": "PCS_UPG",
+          "find": "ValidateServerRoles"
+        }
+      ],
+      "remediation": "Review the installed features in the evidence. Privilege Cloud upgrade guidance sets ValidateServerRoles=No.",
+      "checklist": [
+        {
+          "tool": "Server roles",
+          "location": "Server Manager / Get-WindowsFeature",
+          "item": "Installed roles & features",
+          "expected": "Only the minimum required (no RDS Session Host on a CPM-only server)",
+          "verify": "Get-WindowsFeature | ? Installed | Select Name,FeatureType",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-13", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Advanced audit", "title": "Advanced audit subcategories configured (Success and Failure)",
-      "probe": { "type": "AuditPolicy" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "Auditing for Failure" } ],
-      "remediation": "Compare against the audit table on the CPM task page. If load is too high, CyberArk allows Failure-only auditing."
+      "id": "CPM-13",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Advanced audit",
+      "title": "Advanced audit subcategories configured (Success and Failure)",
+      "probe": {
+        "type": "AuditPolicy"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "Auditing for Failure"
+        }
+      ],
+      "remediation": "Compare against the audit table on the CPM task page. If load is too high, CyberArk allows Failure-only auditing.",
+      "checklist": [
+        {
+          "tool": "Advanced Audit Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration",
+          "item": "Subcategories",
+          "expected": "Per CPM task-description audit table (mostly Success and Failure)",
+          "verify": "auditpol /get /category:*",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-14", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "Any",
-      "stage": "Event log", "title": "Event log size and retention configured",
-      "probe": { "type": "EventLogEvidence", "logs": ["Application", "Security", "System"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "EventLog" } ],
-      "remediation": "Compare the sizes against the values on the CPM task page."
+      "id": "CPM-14",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Event log",
+      "title": "Event log size and retention configured",
+      "probe": {
+        "type": "EventLogEvidence",
+        "logs": [
+          "Application",
+          "Security",
+          "System"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "EventLog"
+        }
+      ],
+      "remediation": "Compare the sizes against the values on the CPM task page.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "Computer Configuration > Administrative Templates > Windows Components > Event Log Service > Application | Security | System",
+          "item": "Specify the maximum log file size (KB); Control Event Log behavior when the log file reaches its maximum size",
+          "expected": "Per CPM doc values (not verified here)",
+          "verify": "gpresult /h C:\\temp\\rsop.html  (or rsop.msc)",
+          "scope": "Domain GPO (in-domain) or Local Group Policy gpedit.msc (out-of-domain)",
+          "basis": "Windows",
+          "registryEquivalent": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\EventLog\\<Log>\\MaxSize, Retention"
+        }
+      ]
     },
     {
-      "id": "CPM-15", "component": "CPM", "platforms": ["SelfHosted", "PrivilegeCloudStandard", "PrivilegeCloudISPSS"], "domainMode": "OutOfDomain",
-      "stage": "Imports INF configuration", "title": "CPM INF security template imported",
-      "probe": { "type": "Manual" },
-      "confidence": "Documented", "failStatus": "MANUAL",
-      "refs": [ { "src": "SH_CPM_TASKS", "find": "Imports the INI file containing the hardening settings" } ],
-      "remediation": "Verify with: secedit /analyze /db %temp%\\chk.sdb /cfg <CPM INF> /log %temp%\\chk.log"
+      "id": "CPM-15",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "OutOfDomain",
+      "stage": "Imports INF configuration",
+      "title": "CPM INF security template imported",
+      "probe": {
+        "type": "Manual"
+      },
+      "confidence": "Documented",
+      "failStatus": "MANUAL",
+      "refs": [
+        {
+          "src": "SH_CPM_TASKS",
+          "find": "Imports the INI file containing the hardening settings"
+        }
+      ],
+      "remediation": "Verify with: secedit /analyze /db %temp%\\chk.sdb /cfg <CPM INF> /log %temp%\\chk.log",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "gpedit.msc > Security Settings > Import Policy",
+          "item": "CPM INF",
+          "expected": "Imported; secedit /analyze clean",
+          "verify": "secedit /analyze /db C:\\temp\\cpm.sdb /cfg '<CPM INF>' /log C:\\temp\\cpm.log",
+          "basis": "Doc"
+        }
+      ]
     },
     {
-      "id": "CPM-16", "component": "CPM", "platforms": ["SelfHosted"], "domainMode": "InDomain",
-      "stage": "In-domain GPO", "title": "CyberArk CPM hardening GPO applied",
-      "probe": { "type": "GpoApplied", "patterns": ["CyberArk", "CPM", "Hardening"] },
-      "confidence": "StepDocumented-MechanismInferred", "failStatus": "NOT DONE",
-      "refs": [ { "src": "SH_CPM_RUN", "find": "GPO" } ],
-      "remediation": "Link the CyberArk CPM hardening GPO to the CPM OU and run gpupdate /force."
+      "id": "CPM-16",
+      "component": "CPM",
+      "platforms": [
+        "SelfHosted"
+      ],
+      "domainMode": "InDomain",
+      "stage": "In-domain GPO",
+      "title": "CyberArk CPM hardening GPO applied",
+      "probe": {
+        "type": "GpoApplied",
+        "patterns": [
+          "CyberArk",
+          "CPM",
+          "Hardening"
+        ]
+      },
+      "confidence": "StepDocumented-MechanismInferred",
+      "failStatus": "NOT DONE",
+      "refs": [
+        {
+          "src": "SH_CPM_RUN",
+          "find": "GPO"
+        }
+      ],
+      "remediation": "Link the CyberArk CPM hardening GPO to the CPM OU and run gpupdate /force.",
+      "checklist": [
+        {
+          "tool": "Group Policy",
+          "location": "gpresult /scope computer /r",
+          "item": "CyberArk CPM hardening GPO",
+          "expected": "Listed as applied; linked to the CPM OU",
+          "verify": "gpresult /scope computer /r",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "ENT-01",
+      "component": "Any",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Compatibility: Microsoft Entra ID",
+      "title": "Entra ID joined server with the RDS Session Host role installed (field-reported Entra SSO / logon breakage)",
+      "probe": {
+        "type": "EntraRdsConflict"
+      },
+      "confidence": "FieldReport-Unverified",
+      "failStatus": "RISK",
+      "refs": [
+        {
+          "src": "MS_ENTRA_VM",
+          "find": "AzureAdJoined : YES"
+        },
+        {
+          "src": "MS_AVD_HOSTS",
+          "find": "Install-WindowsFeature -Name RDS-RD-Server"
+        }
+      ],
+      "remediation": "PSM needs the RDS Session Host role, so on an Entra-joined PSM host test Entra/SSO logon after role install and after hardening. Microsoft Learn does not state this break for standalone RDS (AVD documents Entra-joined session hosts WITH this role), so treat as a field-reported risk and validate in your build.",
+      "checklist": [
+        {
+          "tool": "Server roles",
+          "location": "Get-WindowsFeature",
+          "item": "RDS-RD-Server (Remote Desktop Session Host)",
+          "expected": "If Entra joined: flag as RISK and test Entra / SSO logon",
+          "verify": "Get-WindowsFeature RDS-RD-Server",
+          "basis": "Windows"
+        },
+        {
+          "tool": "Entra ID join state",
+          "location": "dsregcmd /status",
+          "item": "AzureAdJoined, DomainJoined, AzureAdPrt",
+          "expected": "Document the join type; Microsoft goal state for Entra logon: AzureAdJoined : YES, AzureAdPrt : YES",
+          "verify": "dsregcmd /status",
+          "basis": "Doc"
+        }
+      ]
+    },
+    {
+      "id": "ENT-02",
+      "component": "Any",
+      "platforms": [
+        "SelfHosted",
+        "PrivilegeCloudStandard",
+        "PrivilegeCloudISPSS"
+      ],
+      "domainMode": "Any",
+      "stage": "Compatibility: Microsoft Entra ID",
+      "title": "PKU2U online-ID authentication enabled (required for Entra ID RDP sign-in)",
+      "probe": {
+        "type": "EntraPku2u"
+      },
+      "confidence": "Documented",
+      "failStatus": "RISK",
+      "refs": [
+        {
+          "src": "MS_ENTRA_VM",
+          "find": "Network security: Allow PKU2U authentication requests to this computer to use online identities"
+        }
+      ],
+      "remediation": "Hardening baselines/INFs commonly disable this Security Option; if Entra ID RDP logon is required, it must be Enabled on server and client (Microsoft Learn).",
+      "checklist": [
+        {
+          "tool": "Local Security Policy",
+          "location": "Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options",
+          "item": "Network security: Allow PKU2U authentication requests to this computer to use online identities",
+          "expected": "Enabled when Entra ID RDP logon is required",
+          "verify": "secpol.msc",
+          "basis": "Doc"
+        },
+        {
+          "tool": "Registry",
+          "location": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\pku2u",
+          "item": "AllowOnlineID",
+          "type": "REG_DWORD",
+          "expected": "1 (Enabled)",
+          "verify": "Get-ItemProperty -Path 'Registry::HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\pku2u' -Name 'AllowOnlineID'",
+          "basis": "Windows",
+          "note": "Registry location is Windows knowledge; the policy name is from Microsoft Learn."
+        }
+      ]
     }
   ]
 }

@@ -36,6 +36,8 @@ function Assert-Status($report, $id, $expected) {
         $Folder = $Folder -replace '\\', '/'
         @($global:Fake.Files.Values | Where-Object { $f = $_; $f.FullName.StartsWith($Folder) -and @($Patterns | Where-Object { ($f.FullName | Split-Path -Leaf) -like $_ }).Count })
     }
+    function script:Get-EntraJoinState { $global:Fake.Entra }
+    function script:Test-WindowsFeatureInstalled($Name) { $global:Fake.Features -contains $Name }
     function script:Get-FileText($Path) { $global:Fake.Text[($Path -replace '\\', '/')] }
 }
 
@@ -55,6 +57,7 @@ $reg = @{
 foreach ($p in 'SSL 2.0', 'SSL 3.0', 'TLS 1.0', 'TLS 1.1') { foreach ($r in 'Server', 'Client') { $reg["$sch\$p\$r|Enabled"] = 0; $reg["$sch\$p\$r|DisabledByDefault"] = 1 } }
 
 $global:Fake = @{
+    Entra = @{ AzureAdJoined = 'YES'; DomainJoined = 'NO'; AzureAdPrt = 'YES' }; Features = @('RDS-RD-Server')
     Reg = $reg; Domain = $false; Smb1 = $false; Gpos = @(); Firewall = @('CyberArk block WireServer')
     Services = @{
         'Cyber-Ark Privileged Session Manager' = @{ Name = 'Cyber-Ark Privileged Session Manager'; DisplayName = 'CyberArk Privileged Session Manager'; StartMode = 'Auto'; State = 'Running'; PathName = "`"$psm/CAPSM.exe`"" }
@@ -90,9 +93,17 @@ Assert-Status $a 'PSM-40' 'N/A'       # self-hosted in-domain only
 Assert-Status $a 'CON-01' 'N/A'       # in-domain only
 Assert-Status $a 'CON-03' 'MANUAL'
 Assert-Status $a 'CPM-05' 'N/A'
+Assert-Status $a 'ENT-01' 'RISK'      # Entra joined + RDS Session Host role
+Assert-Status $a 'ENT-02' 'RISK'      # PKU2U AllowOnlineID not set
+$exp = ($a.Results | Where-Object Id -eq 'PSM-03').Expected
+if ($exp -notmatch 'RDP-Tcp > MinEncryptionLevel \[REG_DWORD\] = 3') { Write-Host "FAIL PSM-03 Expected text: $exp"; $failures++ } else { Write-Host 'ok   PSM-03 Expected shows exact path/value/type' }
+$global:Fake.Reg['HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u|AllowOnlineID'] = 1
+$a2 = Invoke-CyberArkHardeningAudit -Platform PrivilegeCloudISPSS -CatalogPath (Join-Path $root 'HardeningCatalog.json')
+Assert-Status $a2 'ENT-02' 'DONE'
 
 # --- Scenario B: bare server, self-hosted, in domain, PSM + CPM -------------
 $global:Fake.Reg = @{}
+$global:Fake.Entra = @{ AzureAdJoined = 'NO'; DomainJoined = 'YES'; AzureAdPrt = 'NO' }
 $global:Fake.Domain = $true; $global:Fake.Smb1 = $true; $global:Fake.Firewall = @(); $global:Fake.Gpos = @('Default Domain Policy')
 $global:Fake.Services['CyberArk Password Manager'] = @{ Name = 'CyberArk Password Manager'; DisplayName = 'CyberArk Password Manager'; StartMode = 'Auto'; State = 'Running'; PathName = "$cpm/PMEngine.exe /service" }
 $global:Fake.Services['Windows Error Reporting Service'] = @{ Name = 'WerSvc'; DisplayName = 'Windows Error Reporting Service'; StartMode = 'Manual'; State = 'Stopped' }
@@ -130,6 +141,8 @@ Assert-Status $b 'CPM-11' 'SKIPPED'    # FIPS disabled in config
 Assert-Status $b 'CPM-12' 'SKIPPED'    # ValidateServerRoles=No in config
 Assert-Status $b 'CFG-ImportINF' 'SKIPPED'  # unmodelled switch surfaced
 Assert-Status $b 'CPM-16' 'NOT DONE'
+Assert-Status $b 'ENT-01' 'N/A'       # not Entra joined
+Assert-Status $b 'ENT-02' 'N/A'
 
 # --- catalog + HTML -----------------------------------------------------------
 $problems = Test-HardeningCatalog (Get-HardeningCatalog (Join-Path $root 'HardeningCatalog.json'))
@@ -137,6 +150,12 @@ if ($problems.Count) { Write-Host "FAIL catalog: $($problems -join '; ')"; $fail
 $out = Join-Path ([IO.Path]::GetTempPath()) 'ca-hardening-test'
 $files = Export-HardeningReport -Report $b -OutputFolder $out
 if (@($files | Where-Object { -not (Test-Path $_) }).Count) { Write-Host 'FAIL export'; $failures++ } else { Write-Host "ok   export -> $($files -join ', ')" }
+
+$cl = Export-HardeningChecklist -CatalogPath (Join-Path $root 'HardeningCatalog.json') -OutputFolder (Join-Path $out 'checklist')
+$rows = Get-HardeningChecklistRows (Get-HardeningCatalog (Join-Path $root 'HardeningCatalog.json')) 'SelfHosted' 'OutOfDomain'
+if (@($cl).Count -ne 8) { Write-Host "FAIL checklist file count $(@($cl).Count)"; $failures++ } else { Write-Host 'ok   checklist exported (html, csv, 6 md)' }
+if (@($rows | Where-Object CheckId -in 'PSM-40', 'PSM-13', 'CON-01').Count) { Write-Host 'FAIL checklist filter leaked in-domain / PCloud-only rows'; $failures++ } else { Write-Host 'ok   checklist filter by platform/domain' }
+if (-not @($rows | Where-Object { $_.Tool -eq 'Registry' -and $_.Location -like '*RDP-Tcp' -and $_.Item -eq 'MinEncryptionLevel' -and $_.Expected -like '3*' }).Count) { Write-Host 'FAIL registry row'; $failures++ } else { Write-Host 'ok   registry row has exact key/value/expected' }
 
 Write-Host "`n$failures failure(s)"
 exit $failures

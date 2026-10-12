@@ -162,6 +162,23 @@ function Get-FilesInFolder {
 
 function Get-FileText { param([string]$Path) Get-Content -LiteralPath $Path -Raw -ErrorAction SilentlyContinue }
 
+function Get-EntraJoinState {
+    # Parses dsregcmd /status into @{ AzureAdJoined; DomainJoined; AzureAdPrt } (YES/NO strings)
+    $state = @{ AzureAdJoined = 'UNKNOWN'; DomainJoined = 'UNKNOWN'; AzureAdPrt = 'UNKNOWN' }
+    if (-not (Get-Command dsregcmd.exe -ErrorAction SilentlyContinue)) { return $state }
+    foreach ($line in (& dsregcmd.exe /status 2>$null)) {
+        if ($line -match '^\s*(AzureAdJoined|DomainJoined|AzureAdPrt)\s*:\s*(\w+)') { $state[$Matches[1]] = $Matches[2].ToUpperInvariant() }
+    }
+    return $state
+}
+
+function Test-WindowsFeatureInstalled {
+    param([string]$Name)
+    if (-not (Get-Command Get-WindowsFeature -ErrorAction SilentlyContinue)) { return $null }
+    $f = Get-WindowsFeature -Name $Name -ErrorAction SilentlyContinue
+    return [bool]($f -and $f.Installed)
+}
+
 #endregion
 
 #region Context
@@ -525,6 +542,22 @@ function Invoke-Probe {
             return New-ProbeResult 'Manual' ("installed roles: {0}" -f $(if (@($f).Count) { $f -join ', ' } else { '<none>' }))
         }
 
+        'EntraRdsConflict' {
+            $j = Get-EntraJoinState
+            $rds = Test-WindowsFeatureInstalled 'RDS-RD-Server'
+            $ev = "AzureAdJoined=$($j.AzureAdJoined); DomainJoined=$($j.DomainJoined); AzureAdPrt=$($j.AzureAdPrt); RDS-RD-Server installed=$rds"
+            if ($j.AzureAdJoined -ne 'YES') { return New-ProbeResult 'NotApplicable' "not Entra ID joined | $ev" }
+            if ($null -eq $rds) { return New-ProbeResult 'Manual' "cannot query roles | $ev" }
+            $r = if ($rds) { 'Fail' } else { 'Pass' }
+            return New-ProbeResult $r $ev
+        }
+
+        'EntraPku2u' {
+            $j = Get-EntraJoinState
+            if ($j.AzureAdJoined -ne 'YES') { return New-ProbeResult 'NotApplicable' "not Entra ID joined (AzureAdJoined=$($j.AzureAdJoined))" }
+            return Test-RegistryItem ([pscustomobject]@{ path = 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u'; name = 'AllowOnlineID'; operator = 'eq'; expected = 1 })
+        }
+
         'Manual' { return New-ProbeResult 'Manual' 'No reliable automatic signal. Verify by hand (see remediation).' }
 
         default { throw "Unknown probe type '$($Probe.type)'" }
@@ -547,7 +580,7 @@ function Test-HardeningCatalog {
     $known = 'Registry', 'RegistrySet', 'SchannelLegacyDisabled', 'SchannelEvidence', 'Smb1Server', 'ServicesDisabled', 'UserRight', 'LocalUsers',
              'LocalGroupExists', 'LocalGroupEmpty', 'AppLocker', 'FirewallBlock', 'GpoApplied', 'ComputerOU', 'FilePresent', 'HardeningLog',
              'ReappliedAfterUpgrade', 'PsmCoexistence', 'ConfigEvidence', 'DepExclusion', 'AclEvidence', 'AuditPolicy', 'EventLogEvidence',
-             'WindowsFeatures', 'Manual'
+             'WindowsFeatures', 'EntraRdsConflict', 'EntraPku2u', 'Manual'
     $ids = @{}
     foreach ($c in $Catalog.checks) {
         if ($ids.ContainsKey($c.id)) { $problems.Add("duplicate id $($c.id)") }
@@ -560,7 +593,15 @@ function Test-HardeningCatalog {
         foreach ($r in $c.refs) {
             if (-not $Catalog.sources.PSObject.Properties[$r.src]) { $problems.Add("$($c.id): unknown source $($r.src)") }
         }
-        if (@('NOT DONE', 'MANUAL') -notcontains $c.failStatus) { $problems.Add("$($c.id): bad failStatus $($c.failStatus)") }
+        if (@('NOT DONE', 'MANUAL', 'RISK') -notcontains $c.failStatus) { $problems.Add("$($c.id): bad failStatus $($c.failStatus)") }
+        if (-not $c.PSObject.Properties['checklist'] -or -not @($c.checklist).Count) { $problems.Add("$($c.id): no checklist entries") }
+        else {
+            foreach ($e in $c.checklist) {
+                foreach ($f in 'tool', 'location', 'item', 'expected', 'verify', 'basis') {
+                    if (-not $e.PSObject.Properties[$f] -or -not $e.$f) { $problems.Add("$($c.id): checklist entry missing '$f'") }
+                }
+            }
+        }
     }
     return , $problems
 }
@@ -573,6 +614,7 @@ function Resolve-CheckStatus {
           SKIPPED   optional/default-off step not applied, or step switched off in the hardening config file
           MANUAL    needs a human to confirm (evidence attached)
           N/A       not applicable to this platform / component / domain mode
+          RISK      compatibility risk (e.g. Microsoft Entra ID logon) - not a CyberArk hardening step
           ERROR     the probe itself failed
     #>
     param($Check, $Ctx)
@@ -608,6 +650,16 @@ function Resolve-CheckStatus {
     }
 }
 
+function Format-ChecklistExpected {
+    # One line per checklist entry: [Tool] location > item [type] = expected
+    param($Check)
+    if (-not $Check.PSObject.Properties['checklist']) { return '' }
+    (@($Check.checklist | ForEach-Object {
+        $t = if ($_.PSObject.Properties['type']) { " [$($_.type)]" } else { '' }
+        '[{0}] {1} > {2}{3} = {4}' -f $_.tool, $_.location, $_.item, $t, $_.expected
+    }) -join "`n")
+}
+
 function Invoke-CyberArkHardeningAudit {
     [CmdletBinding()]
     param(
@@ -636,6 +688,7 @@ function Invoke-CyberArkHardeningAudit {
             Title       = $c.title
             Status      = $s.Status
             Evidence    = $s.Evidence
+            Expected    = Format-ChecklistExpected $c
             Confidence  = $c.confidence
             Remediation = $c.remediation
             Sources     = $refs
@@ -652,7 +705,7 @@ function Invoke-CyberArkHardeningAudit {
         if ($modelled -contains ($k -replace '_', '').ToLowerInvariant()) { continue }
         [pscustomobject]@{
             Id = "CFG-$k"; Component = $(if ($v.Source -match 'PSMHardening') { 'PSM' } else { 'CPM' }); Stage = 'Hardening config switch'
-            Title = "Step/switch '$k' turned off in hardening file"; Status = 'SKIPPED'; Evidence = "$k=$($v.Value) in $($v.Source)"
+            Title = "Step/switch '$k' turned off in hardening file"; Status = 'SKIPPED'; Evidence = "$k=$($v.Value) in $($v.Source)"; Expected = 'Exclusion approved'
             Confidence = 'Observed'; Remediation = 'Confirm this exclusion is approved and documented.'; Sources = @()
         }
     }
@@ -677,7 +730,7 @@ function Export-HardeningReport {
     $base = Join-Path $OutputFolder "CyberArkHardening_$stamp"
 
     $Report | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath "$base.json" -Encoding UTF8
-    $Report.Results | Select-Object Id, Component, Stage, Title, Status, Confidence, Evidence, Remediation,
+    $Report.Results | Select-Object Id, Component, Stage, Title, Status, Confidence, Expected, Evidence, Remediation,
         @{ n = 'SourceUrls'; e = { ($_.Sources | ForEach-Object { $_.Url }) -join ' ' } },
         @{ n = 'FindText';   e = { ($_.Sources | ForEach-Object { $_.Find }) -join ' || ' } } |
         Export-Csv -LiteralPath "$base.csv" -NoTypeInformation -Encoding UTF8
@@ -689,13 +742,13 @@ function ConvertTo-HardeningHtml {
     param($Report)
     Add-Type -AssemblyName System.Web -ErrorAction SilentlyContinue
     $enc = { param($s) [System.Net.WebUtility]::HtmlEncode([string]$s) }
-    $order = 'NOT DONE', 'ERROR', 'MANUAL', 'SKIPPED', 'DONE', 'N/A'
+    $order = 'NOT DONE', 'RISK', 'ERROR', 'MANUAL', 'SKIPPED', 'DONE', 'N/A'
     $counts = foreach ($st in $order) { '<span class="pill s{0}">{1}: {2}</span>' -f ($st -replace '[^A-Z]', ''), $st, @($Report.Results | Where-Object Status -eq $st).Count }
     $rows = foreach ($r in ($Report.Results | Sort-Object { [array]::IndexOf($order, $_.Status) }, Id)) {
         $src = ($r.Sources | ForEach-Object { '<a href="{0}">{1}</a> <small>[{2}] find: &ldquo;{3}&rdquo;</small>' -f (& $enc $_.Url), (& $enc $_.Title), (& $enc $_.Platform), (& $enc $_.Find) }) -join '<br>'
-        '<tr data-status="{0}"><td>{1}</td><td>{2}</td><td>{3}</td><td><b>{4}</b></td><td class="st s{5}">{0}</td><td>{6}</td><td>{7}</td><td>{8}</td><td>{9}</td></tr>' -f `
+        '<tr data-status="{0}"><td>{1}</td><td>{2}</td><td>{3}</td><td><b>{4}</b></td><td class="st s{5}">{0}</td><td class="pre">{10}</td><td>{6}</td><td>{7}</td><td>{8}</td><td>{9}</td></tr>' -f `
             (& $enc $r.Status), (& $enc $r.Id), (& $enc $r.Component), (& $enc $r.Stage), (& $enc $r.Title), ($r.Status -replace '[^A-Z]', ''),
-            (& $enc $r.Evidence), (& $enc $r.Confidence), (& $enc $r.Remediation), $src
+            (& $enc $r.Evidence), (& $enc $r.Confidence), (& $enc $r.Remediation), $src, (& $enc $r.Expected)
     }
 @"
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -707,13 +760,14 @@ body{background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,Segoe UI,sans
 table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}
 th{position:sticky;top:0;background:var(--bg)}small{color:var(--mut)}a{color:inherit}
 .pill{display:inline-block;margin:0 8px 8px 0;padding:2px 10px;border:1px solid var(--bd);border-radius:12px;cursor:pointer}
-.sDONE{color:var(--done)}.sNOTDONE{color:var(--nd)}.sERROR{color:var(--nd)}.sMANUAL{color:var(--man)}.sSKIPPED{color:var(--sk)}.sNA{color:var(--na)}
+.pre{white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.sRISK{color:var(--nd);font-weight:600}.sDONE{color:var(--done)}.sNOTDONE{color:var(--nd)}.sERROR{color:var(--nd)}.sMANUAL{color:var(--man)}.sSKIPPED{color:var(--sk)}.sNA{color:var(--na)}
 .wrap{overflow-x:auto}
 </style></head><body>
 <h1>CyberArk Hardening Audit</h1>
 <p>$(& $enc $Report.Computer) &middot; Platform <b>$(& $enc $Report.Platform)</b> &middot; $(& $enc $Report.DomainMode) &middot; Components: $(& $enc ($Report.Components -join ', ')) &middot; $(& $enc $Report.GeneratedUtc) &middot; catalog $(& $enc $Report.CatalogVersion)</p>
 <p>$($counts -join '') <span class="pill" data-all="1">show all</span></p>
-<div class="wrap"><table><thead><tr><th>Id</th><th>Comp</th><th>Stage</th><th>Step</th><th>Status</th><th>Evidence</th><th>Confidence</th><th>Remediation</th><th>Official source</th></tr></thead>
+<div class="wrap"><table><thead><tr><th>Id</th><th>Comp</th><th>Stage</th><th>Step</th><th>Status</th><th>Expected after hardening</th><th>Evidence (actual)</th><th>Confidence</th><th>Remediation</th><th>Official source</th></tr></thead>
 <tbody>
 $($rows -join "`n")
 </tbody></table></div>
@@ -727,4 +781,169 @@ document.querySelectorAll('tbody tr').forEach(function(r){r.style.display=(!s||r
 
 #endregion
 
-Export-ModuleMember -Function Invoke-CyberArkHardeningAudit, Export-HardeningReport, Get-HardeningCatalog, Test-HardeningCatalog, ConvertTo-HardeningHtml
+#region Checklist (offline: needs only the catalog)
+
+$script:ToolOrder = 'Registry', 'Group Policy', 'Local Security Policy', 'Advanced Audit Policy', 'Services', 'AppLocker', 'Windows Firewall',
+                    'Local Users & Groups', 'File system ACL', 'Files & Logs', 'Hardening config', 'Server roles', 'Entra ID join state',
+                    'PowerShell', 'Task Scheduler', 'Active Directory', 'Change records'
+
+function Get-HardeningChecklistRows {
+    <#
+        Flattens the catalog into one row per (check, tool entry), optionally filtered
+        to one platform / domain mode. Sorted by tool, then check id.
+    #>
+    param($Catalog, [string]$Platform = 'All', [string]$DomainMode = 'All')
+    $rows = foreach ($c in $Catalog.checks) {
+        if ($Platform -ne 'All' -and $c.platforms -notcontains $Platform) { continue }
+        if ($DomainMode -ne 'All' -and $c.domainMode -ne 'Any' -and $c.domainMode -ne $DomainMode) { continue }
+        $optional = [bool]($c.PSObject.Properties['optional'] -and $c.optional)
+        $urls = @($c.refs | ForEach-Object { $Catalog.sources.($_.src).url })
+        $finds = @($c.refs | ForEach-Object { $_.find })
+        foreach ($e in $c.checklist) {
+            $get = { param($n) if ($e.PSObject.Properties[$n]) { [string]$e.$n } else { '' } }
+            [pscustomobject]@{
+                Tool       = $e.tool
+                CheckId    = $c.id
+                Component  = $c.component
+                Stage      = $c.stage
+                Step       = $c.title
+                Platforms  = ($c.platforms -join ', ')
+                DomainMode = $c.domainMode
+                Optional   = $optional
+                Location   = $e.location
+                Item       = $e.item
+                Type       = & $get 'type'
+                Expected   = $e.expected
+                RegistryEquivalent = & $get 'registryEquivalent'
+                Scope      = & $get 'scope'
+                Verify     = $e.verify
+                Basis      = $e.basis
+                Note       = & $get 'note'
+                Confidence = $c.confidence
+                SourceUrls = ($urls -join ' ')
+                FindText   = ($finds -join ' || ')
+            }
+        }
+    }
+    @($rows | Sort-Object { $i = [array]::IndexOf($script:ToolOrder, $_.Tool); if ($i -lt 0) { 99 } else { $i } }, CheckId)
+}
+
+function Group-ByTool {
+    # Group-Object sorts by name; keep the intended tool order instead
+    param($Rows)
+    $groups = @($Rows | Group-Object Tool)
+    @($groups | Sort-Object { $i = [array]::IndexOf($script:ToolOrder, $_.Name); if ($i -lt 0) { 99 } else { $i } }, Name)
+}
+
+function ConvertTo-ChecklistMarkdown {
+    param($Rows, [string]$Platform, [string]$DomainMode, [string]$CatalogVersion)
+    $md = New-Object System.Text.StringBuilder
+    $esc = { param($t) ([string]$t -replace '\|', '\|' -replace "`r?`n", '<br>') }
+    [void]$md.AppendLine("# CyberArk PSM / CPM hardening checklist - by tool")
+    [void]$md.AppendLine("")
+    [void]$md.AppendLine("Platform: **$Platform** | Domain mode: **$DomainMode** | Catalog $CatalogVersion")
+    [void]$md.AppendLine("")
+    [void]$md.AppendLine("Basis: **Doc** = path/value stated by CyberArk or Microsoft docs. **Windows** = the step is documented but the path/value is standard Windows knowledge, verify on your build. Optional steps are marked *(optional)*.")
+    foreach ($g in (Group-ByTool $Rows)) {
+        [void]$md.AppendLine("")
+        [void]$md.AppendLine("## $($g.Name)")
+        [void]$md.AppendLine("")
+        [void]$md.AppendLine("| Done | ID | Applies to | Path / location | Value / setting | Type | Expected after hardening | Verify | Basis |")
+        [void]$md.AppendLine("|---|---|---|---|---|---|---|---|---|")
+        foreach ($r in $g.Group) {
+            $applies = "$($r.Component); $($r.DomainMode)" + $(if ($r.Optional) { ' *(optional)*' } else { '' })
+            $exp = $r.Expected
+            if ($r.RegistryEquivalent) { $exp += " (registry: $($r.RegistryEquivalent))" }
+            if ($r.Note) { $exp += " - _$($r.Note)_" }
+            [void]$md.AppendLine(('| [ ] | {0} | {1} | `{2}` | {3} | {4} | {5} | `{6}` | {7} |' -f $r.CheckId, (& $esc $applies), (& $esc $r.Location), (& $esc $r.Item), (& $esc $r.Type), (& $esc $exp), (& $esc $r.Verify), $r.Basis))
+        }
+    }
+    $md.ToString()
+}
+
+function ConvertTo-ChecklistHtml {
+    param($Rows, [string]$CatalogVersion)
+    $enc = { param($s) [System.Net.WebUtility]::HtmlEncode([string]$s) }
+    $sections = foreach ($g in (Group-ByTool $Rows)) {
+        $trs = foreach ($r in $g.Group) {
+            $exp = & $enc $r.Expected
+            if ($r.RegistryEquivalent) { $exp += '<br><small>registry: <code>' + (& $enc $r.RegistryEquivalent) + '</code></small>' }
+            if ($r.Scope) { $exp += '<br><small>' + (& $enc $r.Scope) + '</small>' }
+            if ($r.Note) { $exp += '<br><small><i>' + (& $enc $r.Note) + '</i></small>' }
+            $src = (@($r.SourceUrls -split ' ' | Where-Object { $_ }) | ForEach-Object { '<a href="{0}">source</a>' -f (& $enc $_) }) -join ' '
+            '<tr data-platforms="{0}" data-domain="{1}" data-comp="{2}"><td><input type="checkbox" aria-label="done"></td><td>{3}{4}</td><td>{2}<br><small>{1}</small></td><td><code>{5}</code></td><td>{6}</td><td>{7}</td><td>{8}</td><td><code>{9}</code></td><td>{10}<br><small>{11}</small></td><td>{12}<br><small>find: &ldquo;{13}&rdquo;</small></td></tr>' -f `
+                (& $enc $r.Platforms), (& $enc $r.DomainMode), (& $enc $r.Component), (& $enc $r.CheckId), $(if ($r.Optional) { ' <small>(optional)</small>' } else { '' }),
+                (& $enc $r.Location), (& $enc $r.Item), (& $enc $r.Type), $exp, (& $enc $r.Verify), (& $enc $r.Basis), (& $enc $r.Confidence), $src, (& $enc $r.FindText)
+        }
+        '<section><h2>{0} <small>({1})</small></h2><div class="wrap"><table><thead><tr><th>Done</th><th>ID</th><th>Applies</th><th>Path / location</th><th>Value / setting</th><th>Type</th><th>Expected after hardening</th><th>Verify</th><th>Basis</th><th>Source</th></tr></thead><tbody>{2}</tbody></table></div></section>' -f (& $enc $g.Name), $g.Count, ($trs -join "`n")
+    }
+@"
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hardening Checklist by Tool</title>
+<style>
+:root{--bg:#fff;--fg:#1b1f24;--mut:#59636e;--bd:#d1d9e0;--code:#f6f8fa}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#30363d;--code:#161b22}}
+body{background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,Segoe UI,sans-serif;margin:0;padding:16px}
+table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}
+code{background:var(--code);padding:1px 4px;border-radius:4px;font-size:12px;word-break:break-all}
+small{color:var(--mut)}a{color:inherit}.wrap{overflow-x:auto}h2{margin-top:28px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;position:sticky;top:0;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--bd)}
+select{font:inherit;padding:2px 6px}
+@media print{.bar{display:none}}
+</style></head><body>
+<h1>CyberArk PSM / CPM hardening checklist - by tool</h1>
+<p><small>Catalog $(& $enc $CatalogVersion). Basis <b>Doc</b> = path/value stated by CyberArk or Microsoft docs; <b>Windows</b> = step documented, path/value from standard Windows knowledge, verify on your build.</small></p>
+<div class="bar">
+<label>Platform <select id="fp"><option value="">All</option><option>SelfHosted</option><option>PrivilegeCloudStandard</option><option>PrivilegeCloudISPSS</option></select></label>
+<label>Domain <select id="fd"><option value="">All</option><option>InDomain</option><option>OutOfDomain</option></select></label>
+<label>Component <select id="fc"><option value="">All</option><option>PSM</option><option>CPM</option></select></label>
+<span id="cnt"></span>
+</div>
+$($sections -join "`n")
+<script>
+(function(){
+  var fp=document.getElementById('fp'),fd=document.getElementById('fd'),fc=document.getElementById('fc'),cnt=document.getElementById('cnt');
+  function apply(){
+    var n=0;
+    document.querySelectorAll('tbody tr').forEach(function(r){
+      var ok=(!fp.value||r.dataset.platforms.indexOf(fp.value)>=0)&&(!fd.value||r.dataset.domain==='Any'||r.dataset.domain===fd.value)&&(!fc.value||r.dataset.comp==='Any'||r.dataset.comp===fc.value);
+      r.style.display=ok?'':'none'; if(ok)n++;
+    });
+    document.querySelectorAll('section').forEach(function(s){
+      s.style.display=[].some.call(s.querySelectorAll('tbody tr'),function(r){return r.style.display!=='none'})?'':'none';
+    });
+    cnt.textContent=n+' items';
+  }
+  [fp,fd,fc].forEach(function(e){e.onchange=apply}); apply();
+})();
+</script></body></html>
+"@
+}
+
+function Export-HardeningChecklist {
+    param(
+        [string]$CatalogPath = (Join-Path $PSScriptRoot 'HardeningCatalog.json'),
+        [Parameter(Mandatory)][string]$OutputFolder
+    )
+    $catalog = Get-HardeningCatalog $CatalogPath
+    if (-not (Test-Path -LiteralPath $OutputFolder)) { $null = New-Item -ItemType Directory -Path $OutputFolder }
+    $out = @()
+    $all = Get-HardeningChecklistRows $catalog
+    $base = Join-Path $OutputFolder 'Checklist_ByTool'
+    $all | Export-Csv -LiteralPath "$base.csv" -NoTypeInformation -Encoding UTF8
+    ConvertTo-ChecklistHtml $all $catalog.catalogVersion | Set-Content -LiteralPath "$base.html" -Encoding UTF8
+    $out += "$base.html", "$base.csv"
+    foreach ($pf in $script:Platforms) {
+        foreach ($dm in $script:DomainModes) {
+            $rows = Get-HardeningChecklistRows $catalog $pf $dm
+            $f = Join-Path $OutputFolder ("Checklist_{0}_{1}.md" -f $pf, $dm)
+            ConvertTo-ChecklistMarkdown $rows $pf $dm $catalog.catalogVersion | Set-Content -LiteralPath $f -Encoding UTF8
+            $out += $f
+        }
+    }
+    return $out
+}
+
+#endregion
+
+Export-ModuleMember -Function Invoke-CyberArkHardeningAudit, Export-HardeningReport, Get-HardeningCatalog, Test-HardeningCatalog, ConvertTo-HardeningHtml, Export-HardeningChecklist, Get-HardeningChecklistRows
